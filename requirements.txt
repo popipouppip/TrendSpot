@@ -1,0 +1,3 @@
+anthropic
+pytrends
+python-dotenv
