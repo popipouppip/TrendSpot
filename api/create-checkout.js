@@ -14,9 +14,7 @@ module.exports = async (req, res) => {
   }
 
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000';
+  const baseUrl = process.env.SITE_URL || 'https://trend-spot-8nim.vercel.app';
 
   try {
     const session = await stripe.checkout.sessions.create({
