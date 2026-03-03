@@ -1035,6 +1035,7 @@
         <div class="price-amount">$4.99</div>
         <div class="price-period">/ month</div>
       </div>
+      <button class="btn-primary" style="width:100%;margin-bottom:12px" onclick="startCheckout('pro')">Get PRO</button>
       <div class="plan-features">
         <div class="feature">
           <span class="feature-check">✓</span>
@@ -1073,6 +1074,7 @@
         <div class="price-amount">$6.99</div>
         <div class="price-period">/ month</div>
       </div>
+      <button class="btn-primary" style="width:100%;margin-bottom:12px;background:#6F6F77" onclick="startCheckout('maximum')">Get MAXIMUM</button>
       <div class="plan-features">
         <div class="feature">
           <span class="feature-check">✓</span>
@@ -1903,6 +1905,28 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
 <script>
   let currentUser = null;
   let userPlan = 'free';
+
+  // ===== STRIPE CHECKOUT =====
+  async function startCheckout(plan) {
+    if (!currentUser) { openAuthModal(); return; }
+    const btn = event.target;
+    btn.textContent = 'Loading...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email })
+      });
+      const data = await res.json();
+      if (data.url) { window.location.href = data.url; }
+      else { alert('Error: ' + (data.error || 'Unknown error')); }
+    } catch(e) {
+      alert('Network error. Try again.');
+    }
+    btn.textContent = plan === 'pro' ? 'Get PRO' : 'Get MAXIMUM';
+    btn.disabled = false;
+  }
 
   // Wait for Firebase to be initialized
   setTimeout(() => {
