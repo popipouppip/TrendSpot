@@ -1480,113 +1480,421 @@
 
   <div class="roadmap-block">
     <div class="roadmap-title">🎯 Step-by-Step Earning Roadmap</div>
-    <div class="roadmap-steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <div class="step-title">Setup & Foundation</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <div class="step-title">Launch Phase</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <div class="step-title">Growth Phase</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <div class="step-title">Monetization</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <div class="step-title">Scale & Optimize</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">6</div>
-        <div class="step-content">
-          <div class="step-title">Passive Income</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">7</div>
-        <div class="step-content">
-          <div class="step-title">Advanced Strategies</div>
-          <div class="step-desc">Detailed description of what to do, which tools you need, and how long it takes</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="analytics-block">
-    <div class="analytics-title">📚 Additional Resources & Tools</div>
-    <div class="roadmap-steps">
-      <div class="step">
-        <div class="step-number">📌</div>
-        <div class="step-content">
-          <div class="step-title">Tool/Resource Name</div>
-          <div class="step-desc">Link and description of what this tool does and why you need it</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">📌</div>
-        <div class="step-content">
-          <div class="step-title">Tool/Resource Name</div>
-          <div class="step-desc">Link and description of what this tool does and why you need it</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">📌</div>
-        <div class="step-content">
-          <div class="step-title">Tool/Resource Name</div>
-          <div class="step-desc">Link and description of what this tool does and why you need it</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="analytics-block">
-    <div class="analytics-title">⚠️ Common Mistakes & How to Avoid Them</div>
-    <div class="roadmap-steps">
-      <div class="step">
-        <div class="step-number">❌</div>
-        <div class="step-content">
-          <div class="step-title">Mistake #1: Something wrong</div>
-          <div class="step-desc">Why this is a problem and how to avoid it / how to fix it</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">❌</div>
-        <div class="step-content">
-          <div class="step-title">Mistake #2: Something wrong</div>
-          <div class="step-desc">Why this is a problem and how to avoid it / how to fix it</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">❌</div>
-        <div class="step-content">
-          <div class="step-title">Mistake #3: Something wrong</div>
-          <div class="step-desc">Why this is a problem and how to avoid it / how to fix it</div>
-        </div>
-      </div>
-    </div>
+    <div class="roadmap-title" style="font-size:0.9rem;font-weight:400;color:#6F6F77;margin-top:-10px;">Choose an idea to see its roadmap:</div>
+    <div id="roadmap-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px;"></div>
+    <div id="roadmap-content"></div>
   </div>
 </div>
+
+<script>
+const roadmaps = {
+  1: {
+    title: "AI Agent Tools",
+    steps: [
+      {t:"Learn the tools (Week 1)", d:"Study Make.com, n8n, and OpenAI/Claude APIs. Build 3 sample workflows for free. Time: 5–10 hrs."},
+      {t:"Define your niche (Week 1)", d:"Pick one industry: real estate, legal, e-commerce. Niche = higher prices + easier sales."},
+      {t:"Build your first agent (Week 2)", d:"Create a lead qualification agent or email auto-responder. Use Make.com + GPT-4o. Deploy to 1 test client for free."},
+      {t:"Land first paid client (Week 3)", d:"Post on LinkedIn and local Facebook groups. Offer $300 pilot project. Target service businesses with 5–50 employees."},
+      {t:"Productize (Month 2)", d:"Package as monthly retainer ($500–1,500/mo). Document setup process so you can resell the same system to 10+ clients."},
+    ],
+    tools: [
+      {t:"Make.com", d:"No-code automation platform. Free tier available. Build workflows connecting 1,500+ apps."},
+      {t:"OpenAI API", d:"GPT-4o for agent logic. ~$0.01 per 1K tokens. Start with $20 credit."},
+      {t:"Notion", d:"Document your agent templates and sell them as add-ons ($49–99 each)."},
+    ],
+    mistakes: [
+      {t:"Building too broad", d:"'AI automation for everyone' = zero clients. Pick one industry, one pain point. Specificity = trust."},
+      {t:"Underpricing", d:"$50 one-time kills your business. Charge $300+ setup + monthly retainer. Clients who pay more stick around."},
+      {t:"Skipping documentation", d:"Every workflow you build should be reusable. Document once, sell 20 times."},
+    ]
+  },
+  2: {
+    title: "Vibe Coding",
+    steps: [
+      {t:"Pick your stack (Week 1)", d:"Use Cursor + Claude or Replit + GPT. Build 2–3 micro-apps in different niches to test what sells."},
+      {t:"Validate the idea (Week 1)", d:"Post on Reddit, IndieHackers, or X. Get 10 people to say 'I'd pay for this' before building the full version."},
+      {t:"Build MVP in 1 week (Week 2)", d:"Use Cursor to generate 80% of the code. Add Stripe with Stripe Checkout. Deploy on Vercel (free)."},
+      {t:"Launch & sell (Week 3)", d:"Post on Product Hunt, Hacker News 'Show HN', and relevant subreddits. Target $500 MRR in first month."},
+      {t:"Flip or grow (Month 2–3)", d:"At $1K MRR: list on Acquire.com for 24–36x multiple ($24K–36K). Or grow to $5K MRR and keep it."},
+    ],
+    tools: [
+      {t:"Cursor", d:"AI code editor. $20/mo. Generates full features from plain English prompts."},
+      {t:"Vercel", d:"Free hosting for Next.js/React apps. Auto-deploys from GitHub."},
+      {t:"Acquire.com", d:"Marketplace for buying/selling micro-SaaS. List your app once it hits $500+ MRR."},
+    ],
+    mistakes: [
+      {t:"Building without validating", d:"Spend 1 week validating, not building. Post the idea first. Save yourself 2 weeks of wasted work."},
+      {t:"No monetization from day 1", d:"Add Stripe before launch. Even a waitlist with a $9 pre-order beats free signups."},
+      {t:"Ignoring churn", d:"A $29/mo tool with 5% monthly churn loses half its users in 14 months. Fix retention before scaling."},
+    ]
+  },
+  3: {
+    title: "Faceless YouTube",
+    steps: [
+      {t:"Pick a niche (Week 1)", d:"Best 2026 niches: AI tools tutorials, personal finance, historical events, true crime. Check search volume on TubeBuddy."},
+      {t:"Set up your pipeline (Week 1)", d:"Script: ChatGPT → Voiceover: ElevenLabs ($22/mo) → Video: Pictory or Runway → Thumbnail: Canva."},
+      {t:"Publish 10 videos (Weeks 2–4)", d:"Publish 3x/week minimum. First 10 videos are practice. Focus on thumbnails and titles — they drive 80% of clicks."},
+      {t:"Hit monetization threshold (Month 2–3)", d:"1,000 subs + 4,000 watch hours = YouTube Partner. Accelerate with 1 viral video in your niche."},
+      {t:"Diversify revenue (Month 3+)", d:"Add affiliate links (20–40% commission), sponsorships ($500–5K/video), and digital products ($29–99)."},
+    ],
+    tools: [
+      {t:"ElevenLabs", d:"AI voice cloning and TTS. $22/mo. Sounds 95% human. Best for English content."},
+      {t:"Pictory", d:"Turn scripts into videos automatically with stock footage. $19/mo. Saves 3–4 hrs per video."},
+      {t:"TubeBuddy", d:"YouTube SEO tool. Find low-competition keywords in your niche. Free tier available."},
+    ],
+    mistakes: [
+      {t:"Giving up before 30 videos", d:"Most channels get zero traction in the first 20 videos. The algorithm needs data. Commit to 90 days minimum."},
+      {t:"Bad thumbnails", d:"Thumbnail + title = 80% of clicks. Study top channels in your niche. Copy the format, not the content."},
+      {t:"One revenue stream", d:"Ad revenue alone is unreliable ($2–5 RPM). Add affiliates from video 1. It costs nothing and compounds."},
+    ]
+  },
+  4: {
+    title: "AI-Powered Newsletter",
+    steps: [
+      {t:"Choose niche + platform (Week 1)", d:"Pick a hyper-specific niche: 'AI for dentists', 'crypto for retirees'. Sign up on Beehiiv (free up to 2,500 subs)."},
+      {t:"Set up AI curation pipeline (Week 1)", d:"Use Feedly + ChatGPT to summarize 50+ sources daily in 30 minutes. Build a Notion template for each issue."},
+      {t:"Get first 500 subscribers (Weeks 2–4)", d:"Post on Reddit, LinkedIn, Twitter/X. Offer a free resource (PDF, checklist) as lead magnet. Goal: 500 subs in 30 days."},
+      {t:"Launch paid tier (Month 2)", d:"At 500 subs: add a $9/mo paid tier with exclusive content. 5% conversion = $225 MRR immediately."},
+      {t:"Add sponsorships (Month 3+)", d:"At 2,000 subs: charge $200–500 per sponsored mention. 2 sponsors/issue = $400–1,000 extra per week."},
+    ],
+    tools: [
+      {t:"Beehiiv", d:"Best newsletter platform in 2026. Built-in monetization, boosts, and analytics. Free up to 2,500 subs."},
+      {t:"Feedly", d:"Aggregate 50+ RSS sources into one feed. AI summary feature saves 2 hrs of reading daily."},
+      {t:"SparkLoop", d:"Newsletter referral program. Subscribers refer friends for rewards. Grows your list on autopilot."},
+    ],
+    mistakes: [
+      {t:"Broad niche", d:"'Business newsletter' has 10,000 competitors. 'AI tools for solo lawyers' has 3. Narrow wins every time."},
+      {t:"Inconsistent publishing", d:"Weekly cadence minimum. Miss 2 issues = 20% unsubscribe spike. Batch-create 4 issues in one day per month."},
+      {t:"Waiting to monetize", d:"Add paid tier at 200 subs, not 2,000. Early adopters are your best customers."},
+    ]
+  },
+  5: {
+    title: "Print-on-Demand + AI Art",
+    steps: [
+      {t:"Create your designs (Week 1)", d:"Generate 20 designs with Midjourney v7. Focus on one style: minimalist, cottagecore, dark academia. Consistency = brand."},
+      {t:"Set up your store (Week 1)", d:"Connect Printify to Etsy (takes 2 hrs). List 20+ products: t-shirts, hoodies, mugs, phone cases, posters."},
+      {t:"SEO your listings (Week 2)", d:"Use EtsyHunt to find low-competition keywords. Put them in titles, tags, and descriptions. 13 tags per listing."},
+      {t:"Run first ads (Week 3)", d:"Start Etsy Ads at $1–3/day. Only promote listings with 5+ views/day organically. Scale winners, kill losers."},
+      {t:"Build a brand (Month 2+)", d:"Move best-sellers to Shopify store ($29/mo). Own your customer list. Add Instagram for organic traffic."},
+    ],
+    tools: [
+      {t:"Midjourney", d:"Best AI image generator for commercial art. $10/mo basic plan. Generates print-ready 2048x2048 images."},
+      {t:"Printify", d:"POD fulfillment. Free plan. Connects to Etsy/Shopify. Ships worldwide. 20–40% margin per product."},
+      {t:"EtsyHunt", d:"Etsy keyword research tool. Find trending products and low-competition niches. Free tier available."},
+    ],
+    mistakes: [
+      {t:"Too many niches", d:"10 products in one niche > 100 products across 10 niches. Etsy algorithm rewards niche stores."},
+      {t:"Ignoring SEO", d:"A great design with bad tags = zero sales. Spend 30 min on keyword research per listing. It compounds."},
+      {t:"Giving up after 30 days", d:"POD takes 60–90 days to gain traction. Most sellers quit at day 45. The winners are still there at day 90."},
+    ]
+  },
+  6: {
+    title: "Prompt Engineering Courses",
+    steps: [
+      {t:"Pick your industry niche (Week 1)", d:"Don't teach 'prompt engineering' — teach 'ChatGPT for real estate agents' or 'AI for HR managers'. Specific = premium price."},
+      {t:"Build a 2-hour course (Week 2)", d:"Record screen + voiceover. 8–12 lessons, 10–15 min each. Use Loom (free) to record. No fancy equipment needed."},
+      {t:"Launch on Gumroad (Week 2)", d:"Price at $49–79. Post in 5 relevant Facebook groups and subreddits. First 10 sales validate the product."},
+      {t:"Add to Udemy (Week 3)", d:"Upload to Udemy for passive organic traffic. Set price at $49.99. Udemy will discount to $12–15 during promos."},
+      {t:"Build email list + upsell (Month 2)", d:"Collect emails via Gumroad. Sell an advanced course ($149) or 1-on-1 coaching ($200/hr) to existing students."},
+    ],
+    tools: [
+      {t:"Loom", d:"Free screen recorder with auto-transcription. Record your course lessons in one take. No editing needed."},
+      {t:"Gumroad", d:"Sell digital products with 10% fee (or $10/mo for 0% fee). Instant payouts. Simple checkout."},
+      {t:"Notion", d:"Build your course outline and workbook. Share as a PDF supplement to boost perceived value."},
+    ],
+    mistakes: [
+      {t:"Making it too technical", d:"Your buyer is a non-technical professional. No jargon. Show them exactly what to type and what to expect."},
+      {t:"No workbook or templates", d:"Add 5 copy-paste prompt templates. Students will pay $20 more just for that. It takes 1 hour to make."},
+      {t:"Skipping the niche", d:"'Prompt engineering for everyone' sells for $9. 'ChatGPT for accountants' sells for $79. Same effort, 8x revenue."},
+    ]
+  },
+  7: {
+    title: "Humanoid Robot Training Data",
+    steps: [
+      {t:"Register as vendor (Week 1)", d:"Apply to Scale AI (scale.ai/careers), Remotasks, and Surge AI as a data contractor. Approval takes 3–7 days."},
+      {t:"Complete qualification tests (Week 1)", d:"Pass motion capture and data labeling tests. Higher accuracy score = higher-paying tasks assigned."},
+      {t:"Build your team (Week 2)", d:"Recruit 5–10 reliable remote workers. Train them on labeling standards. You manage, they execute. Margin: 40–60%."},
+      {t:"Specialize (Month 2)", d:"Focus on medical robotics or manufacturing. Specialized data pays 2–4x more than general tasks."},
+      {t:"Bid on enterprise projects (Month 3)", d:"Apply for direct contracts with robot companies (Figure AI, 1X, Tesla). $10K–50K per project for large datasets."},
+    ],
+    tools: [
+      {t:"Scale AI", d:"Largest AI data platform. Apply at scale.ai. Pays $15–50/hr for quality labelers."},
+      {t:"Remotasks", d:"Entry-level data labeling. Good for training your team. Pays $5–20/hr depending on task complexity."},
+      {t:"Label Studio", d:"Open-source labeling tool. Set up your own labeling pipeline for direct client projects."},
+    ],
+    mistakes: [
+      {t:"Working solo", d:"Solo labeling caps you at $3K/mo. Build a team of 10 to hit $15K+/mo. The margin is in management."},
+      {t:"Low quality = deactivation", d:"Scale AI deactivates vendors with <90% accuracy. QA every batch before submission."},
+      {t:"Ignoring direct outreach", d:"Don't wait for platforms. Email AI startup CTOs directly. 'I have a team of 10 trained labelers' gets responses."},
+    ]
+  },
+  8: {
+    title: "Local AI Setup Services",
+    steps: [
+      {t:"Master the stack (Week 1)", d:"Install Ollama + LLaMA 3.3. Run Llama locally. Learn to deploy Open WebUI. Practice on your own machine: 10 hrs."},
+      {t:"Create a service package (Week 1)", d:"'Local AI Starter Pack' = install + configure + 2hr training session + 30-day support. Price: $799–1,499."},
+      {t:"Find first clients (Week 2)", d:"Target law firms, accounting firms, medical clinics. They have strict privacy needs. Post in local business Facebook groups."},
+      {t:"Deliver and get testimonial (Week 3)", d:"Do a free setup for one client in exchange for a video testimonial. Use it in all future marketing."},
+      {t:"Build recurring revenue (Month 2)", d:"Offer monthly maintenance at $200–500/mo: updates, new model installs, extra training. 10 clients = $2K–5K MRR."},
+    ],
+    tools: [
+      {t:"Ollama", d:"Free local LLM runner. Supports LLaMA, Mistral, Phi-3. Runs on Mac M1+ or Windows with NVIDIA GPU."},
+      {t:"Open WebUI", d:"ChatGPT-like interface for local models. Free and open-source. Non-technical clients love it."},
+      {t:"AnythingLLM", d:"Local RAG system — lets businesses chat with their own documents. The #1 selling feature for businesses."},
+    ],
+    mistakes: [
+      {t:"Targeting wrong clients", d:"Startups will try to DIY it. Target established businesses with 10+ employees who value privacy over cost."},
+      {t:"No recurring revenue", d:"One-time setups are volatile. Push every client to a monthly support plan from day 1."},
+      {t:"Underestimating hardware", d:"Llama 3.3 70B needs 48GB RAM. Know hardware requirements before promising clients anything."},
+    ]
+  },
+  9: {
+    title: "AI Voice Cloning Services",
+    steps: [
+      {t:"Learn the tools (Week 1)", d:"Create samples with ElevenLabs, PlayHT, and Resemble AI. Build a demo reel with 5 different voice styles."},
+      {t:"Build service packages (Week 1)", d:"Package 1: Voice clone creation ($299). Package 2: Video dubbing ($199/video). Package 3: Monthly retainer ($799/mo)."},
+      {t:"Find clients (Week 2)", d:"Target: YouTubers with 10K–100K subs, podcast hosts, online course creators, and marketing agencies. DM 20/day on X and LinkedIn."},
+      {t:"Deliver first projects (Weeks 2–3)", d:"Turn around in 24–48 hrs. Quality = referrals. Add a subtle watermark suggestion in your portfolio."},
+      {t:"Scale with agencies (Month 2+)", d:"Partner with video production agencies as their AI voice provider. One agency = 5–20 projects/month on autopilot."},
+    ],
+    tools: [
+      {t:"ElevenLabs", d:"Best quality voice cloning. $22/mo Creator plan. 10-minute sample = ultra-realistic clone. 29 languages."},
+      {t:"HeyGen", d:"AI video translation + lip sync. Translate YouTube videos to Spanish/French/German. $29/mo."},
+      {t:"Descript", d:"Audio/video editing with voice clone. Remove filler words, fix mistakes with text edits. $24/mo."},
+    ],
+    mistakes: [
+      {t:"Cloning without consent", d:"Always get written consent before cloning someone's voice. No exceptions. Legal risk is real."},
+      {t:"Only offering one service", d:"Combine voice cloning + video dubbing + lip sync. Bundled = 3x higher ticket size."},
+      {t:"Not building a portfolio", d:"Create 10 demo clips in different styles before pitching. Clients buy what they can hear."},
+    ]
+  },
+  10: {
+    title: "Crypto Education Content",
+    steps: [
+      {t:"Define your angle (Week 1)", d:"Don't cover all crypto. Pick one: Bitcoin only, DeFi for beginners, crypto taxes, altcoin research. Your angle = your audience."},
+      {t:"Start YouTube + newsletter (Week 1)", d:"Launch both simultaneously. YouTube for discovery, newsletter for monetization. Cross-promote every video."},
+      {t:"Publish 3x/week for 60 days (Weeks 2–10)", d:"Explain one concept per video/post. 'What is a hardware wallet' beats 'Crypto Deep Dive Episode 47'."},
+      {t:"Add affiliate links (Month 2)", d:"Ledger ($40/sale), Coinbase ($10/signup), NordVPN ($100/sale). Add links to every video description and newsletter."},
+      {t:"Launch a course (Month 3)", d:"'Crypto starter kit' at $49–99 on Gumroad. Promote to your existing audience first. Goal: $2K in first week."},
+    ],
+    tools: [
+      {t:"Beehiiv", d:"Host your crypto newsletter. Built-in paid subscriptions. Crypto audience pays for alpha — charge $15–29/mo."},
+      {t:"TubeBuddy", d:"Find low-competition crypto keywords. 'How to store Bitcoin safely' gets 5K searches/mo with few good videos."},
+      {t:"Ledger Affiliate Program", d:"$40–60 per hardware wallet sale. One video can generate $500–5,000/mo passively."},
+    ],
+    mistakes: [
+      {t:"Giving price predictions", d:"Never predict prices — legal liability + you'll be wrong 50% of the time. Stick to education."},
+      {t:"Ignoring SEO", d:"YouTube and Google SEO compound over time. A well-optimized video from month 1 sends traffic in month 12."},
+      {t:"No email list", d:"YouTube can demonetize your channel overnight. Email list = owned audience. Build it from day 1."},
+    ]
+  },
+  11: {
+    title: "GLP-1 Supplement Niche",
+    steps: [
+      {t:"Research the niche (Week 1)", d:"Study top GLP-1 supplement brands (Berberine, Mounjaro alternatives). Join r/Ozempic and r/WeightLoss to understand buyer language."},
+      {t:"Build review content (Weeks 1–2)", d:"Write 10 comparison articles: 'Best natural GLP-1 alternatives in 2026', 'Berberine vs Ozempic'. Target long-tail keywords."},
+      {t:"Set up affiliate accounts (Week 1)", d:"Apply to: Amazon Associates, iHerb, ClickBank health offers. Commissions: 8–40% per sale."},
+      {t:"Launch YouTube channel (Week 2)", d:"Film supplement reviews. Show before/after research. $500 camera or iPhone. Honest reviews rank better than promotional ones."},
+      {t:"Scale with email list (Month 2+)", d:"Collect emails via a free '7-day GLP-1 protocol' PDF. Promote to list monthly. $5K–10K/mo from email alone."},
+    ],
+    tools: [
+      {t:"Ahrefs / Semrush", d:"Keyword research for supplement reviews. Find 'Ozempic alternatives' = 40K searches/mo, medium competition."},
+      {t:"ClickBank", d:"Health supplement affiliate marketplace. Commissions up to 75%. GLP-1 offers pay $80–150/sale."},
+      {t:"ConvertKit", d:"Email marketing for health content. Free up to 1,000 subscribers. Build sequences promoting top affiliate offers."},
+    ],
+    mistakes: [
+      {t:"Making medical claims", d:"Never say a supplement 'treats' or 'cures' anything. Say 'may support' and add disclaimers. FTC is watching."},
+      {t:"Promoting only one product", d:"Diversify across 5+ products. If one gets discontinued, your income doesn't collapse."},
+      {t:"Ignoring YouTube", d:"Supplement reviews on YouTube get 10x more trust than blog posts. 3 videos/week beats 10 articles/week."},
+    ]
+  },
+  12: {
+    title: "Solar + Home Battery Consulting",
+    steps: [
+      {t:"Get educated (Week 1)", d:"Take NABCEP Associate exam prep (free study guides online). Learn IRA tax credits, net metering laws in your state. 15 hrs."},
+      {t:"Build assessment template (Week 1)", d:"Create a PDF report template: energy audit, ROI calculation, system sizing, installer recommendations. Use Canva."},
+      {t:"Find first clients (Week 2)", d:"Post in Nextdoor and local Facebook groups. 'Free 15-min solar consultation' → convert to $299 written assessment."},
+      {t:"Partner with installers (Week 2)", d:"Call 5 local installers. Offer to send them qualified leads for 5–10% of installation cost ($500–2K per deal)."},
+      {t:"Productize and scale (Month 2)", d:"Sell $199 DIY solar assessment guide on Gumroad. Partner with national installers (Sunrun, Sunnova) for referral programs."},
+    ],
+    tools: [
+      {t:"PVWatts Calculator (NREL)", d:"Free government tool. Calculate exact solar production for any address in the US. Essential for client reports."},
+      {t:"Aurora Solar", d:"Professional solar design software. $169/mo. Creates stunning proposal PDFs that close more deals."},
+      {t:"Sunrun Referral Program", d:"$500–1,000 per closed installation. No license needed. Just send qualified homeowners."},
+    ],
+    mistakes: [
+      {t:"Skipping the referral model", d:"Consulting alone caps at 5 clients/week. Referral partnerships scale to 50+ deals/month with zero extra work."},
+      {t:"Not knowing the tax credits", d:"The 30% federal ITC is the #1 selling point. Know it inside out. Clients decide based on ROI, not technology."},
+      {t:"Targeting renters", d:"Only homeowners can install solar. Wasted pitch time on renters kills your conversion rate."},
+    ]
+  },
+  13: {
+    title: "AI SaaS Micro-Tools",
+    steps: [
+      {t:"Find the pain point (Week 1)", d:"Browse r/entrepreneur, r/smallbusiness, Indie Hackers. Find a complaint mentioned 10+ times: 'I wish there was a tool that...'"},
+      {t:"Validate before building (Week 1)", d:"Create a landing page on Carrd ($19/yr). Run $50 in Meta ads. If 20+ people sign up, build it. If not, pivot."},
+      {t:"Build MVP in 5 days (Week 2)", d:"Use Cursor + Next.js + Supabase. One core feature only. Add Stripe Checkout. Deploy on Vercel. Ship ugly, ship fast."},
+      {t:"Launch and iterate (Week 3)", d:"Product Hunt, Hacker News, relevant subreddits. Talk to every user. Fix top 3 complaints in week 1."},
+      {t:"Grow or exit (Month 2–6)", d:"At $2K MRR: list on Acquire.com (24–36x multiple = $48K–72K). At $5K MRR: raise prices, reduce churn, scale ads."},
+    ],
+    tools: [
+      {t:"Cursor", d:"AI code editor that builds features from prompts. $20/mo. Generates 80% of boilerplate code instantly."},
+      {t:"Supabase", d:"Free open-source Firebase alternative. Database + auth + storage. Free up to 500MB. Perfect for MVPs."},
+      {t:"Acquire.com", d:"SaaS acquisition marketplace. List at 24–36x MRR. A $2K MRR tool sells for $48K–72K in 30–60 days."},
+    ],
+    mistakes: [
+      {t:"Building for months before launching", d:"Ship in 5 days. Every week you delay is a week without revenue feedback. Ugly and live > beautiful and hidden."},
+      {t:"Free tier too generous", d:"If free users never need to upgrade, you have a hobby, not a business. Make free limited by volume, not features."},
+      {t:"Ignoring churn", d:"5% monthly churn = 46% of users gone in 12 months. Fix the #1 cancellation reason before running ads."},
+    ]
+  },
+  14: {
+    title: "AI Data Labeling Agency",
+    steps: [
+      {t:"Get certified on Scale AI (Week 1)", d:"Complete Scale AI's vendor certification. Score 95%+ on test tasks. High scores unlock premium projects ($30–50/hr)."},
+      {t:"Recruit your team (Week 1–2)", d:"Hire 10 remote contractors via Upwork or Fiverr. Train them on your quality standards. Pay $8–15/hr, bill at $25–50/hr."},
+      {t:"Win first project (Week 2)", d:"Bid on a small project ($1K–3K). Deliver with 99% accuracy. Use this as your case study for bigger bids."},
+      {t:"Specialize (Month 2)", d:"Medical, legal, or autonomous vehicle data pays 3–5x more. Get 2 specialists on your team, add $10K/mo in revenue."},
+      {t:"Direct client outreach (Month 3)", d:"Email 50 AI startups/month. 'Trained team of 15, 99% accuracy, 48hr turnaround' gets 5–10% response rate."},
+    ],
+    tools: [
+      {t:"Scale AI Vendor Portal", d:"Primary platform for large enterprise labeling projects. Apply at scale.ai. 2–4 week approval process."},
+      {t:"Label Studio", d:"Host your own labeling jobs for direct clients. Free, open-source, supports all data types."},
+      {t:"Airtable", d:"Track projects, team performance, and client invoices. Free tier works until you hit 1,200 records."},
+    ],
+    mistakes: [
+      {t:"Solo operation", d:"The margin is in managing a team, not doing the work yourself. Hire 10 before month 2 or stay stuck at $3K/mo."},
+      {t:"Accepting all project types", d:"General labeling is commoditized. Specialize in one data type: medical images, legal text, or robotics motion data."},
+      {t:"Late deliveries", d:"Miss one deadline on Scale AI = account suspension. Always deliver 6 hrs early. Build buffer into every estimate."},
+    ]
+  },
+  15: {
+    title: "Digital Twins for SMBs",
+    steps: [
+      {t:"Learn the basics (Weeks 1–2)", d:"Study IoT sensors (Arduino, Raspberry Pi), MQTT protocol, and ThingWorx or Azure Digital Twins. Free courses on Coursera."},
+      {t:"Build a proof of concept (Week 3)", d:"Create a digital twin of a simple machine (conveyor belt, HVAC system) using a $50 Raspberry Pi. Document the process."},
+      {t:"Find first manufacturing client (Week 4)", d:"Visit local manufacturing facilities. Offer a free 1-hr demo showing how a digital twin reduces downtime. Target 20–100 employee shops."},
+      {t:"Deploy and bill monthly (Month 2)", d:"Install sensors, build dashboard. Charge $500–2K/mo for monitoring service. $10K setup fee for complex systems."},
+      {t:"Partner with hardware vendors (Month 3)", d:"Contact IoT hardware distributors. Become their 'implementation partner' for a referral fee on every project."},
+    ],
+    tools: [
+      {t:"ThingWorx (PTC)", d:"Industrial IoT platform. Free developer license. The standard in manufacturing digital twins."},
+      {t:"Node-RED", d:"Free visual IoT programming tool. Connect sensors to dashboards without heavy coding. Runs on Raspberry Pi."},
+      {t:"Grafana", d:"Free real-time dashboard for sensor data. Clients see their machines' status 24/7 from any device."},
+    ],
+    mistakes: [
+      {t:"Starting with enterprise clients", d:"Fortune 500s have 12-month sales cycles. Start with 10–50 employee shops. Close in 2 weeks, not 2 years."},
+      {t:"Overengineering the MVP", d:"First digital twin = 3 sensors + 1 dashboard. Don't build a space shuttle for a client who needs a bicycle."},
+      {t:"No recurring revenue model", d:"One-time setup fees kill cash flow. Push every client to a $500/mo monitoring retainer from day 1."},
+    ]
+  },
+  16: {
+    title: "B2B AI Integration Consulting",
+    steps: [
+      {t:"Build your expertise stack (Week 1)", d:"Get certified: OpenAI API, Claude API, n8n/Make.com. Build 3 portfolio projects: AI for HR, finance, and customer support."},
+      {t:"Define your ICP (Week 1)", d:"Ideal client: $5M–50M revenue, 20–200 employees, no in-house AI team. Industries: professional services, manufacturing, retail."},
+      {t:"Land first 3 clients (Weeks 2–4)", d:"Cold email 100 companies: 'I help [industry] companies save 10hrs/week using AI — free 30-min audit.' 3–5% reply rate."},
+      {t:"Deliver AI audit ($3K–8K) (Month 1)", d:"Document all manual workflows. Identify top 5 AI automation opportunities. Deliver a 20-page PDF report with ROI projections."},
+      {t:"Convert to retainer (Month 2)", d:"Audit clients convert to $2K–5K/mo implementation retainers. 5 retainer clients = $10K–25K MRR."},
+    ],
+    tools: [
+      {t:"Clay", d:"AI-powered lead prospecting. Build targeted lists of companies matching your ICP. $149/mo. Saves 10hrs/week on research."},
+      {t:"Loom", d:"Record audit findings as a video walkthrough. Clients watch a 10-min Loom instead of reading a 20-page PDF."},
+      {t:"Notion", d:"Build your AI audit framework as a Notion template. Reuse and refine across every client. Sell as a standalone product ($299)."},
+    ],
+    mistakes: [
+      {t:"Targeting too-small companies", d:"Companies under $1M revenue can't afford $3K audits. They'll ask you to work for equity. Stick to $5M+ revenue."},
+      {t:"Delivering tools, not outcomes", d:"Clients don't want 'a GPT integration'. They want '10 hours saved per week'. Always sell outcomes, not technology."},
+      {t:"No case studies", d:"After your first 3 clients, get written case studies: 'Saved 15hrs/week, ROI in 6 weeks'. This alone doubles your close rate."},
+    ]
+  },
+  17: {
+    title: "Creator Economy Automation",
+    steps: [
+      {t:"Master the automation stack (Week 1)", d:"Build 5 sample workflows in Make.com: auto-post to 5 platforms, repurpose YouTube to blog, schedule 30 days of content in 1 hr."},
+      {t:"Build 3 service packages (Week 1)", d:"Starter ($500): content repurposing setup. Pro ($1,500): full automation system. Retainer ($800/mo): ongoing management."},
+      {t:"Find creator clients (Week 2)", d:"Target creators with 50K–500K followers who post inconsistently. DM 30/day: 'I can automate your content pipeline in 3 days'."},
+      {t:"Deliver fast (Week 3)", d:"First client in 72 hrs. Screen-record the entire process as a tutorial. Sell the tutorial on Gumroad ($99) later."},
+      {t:"Build agency (Month 2+)", d:"Hire a VA to manage client automations at $15/hr. You sell, VA delivers. 10 retainer clients = $8K/mo with 60% margin."},
+    ],
+    tools: [
+      {t:"Make.com", d:"No-code automation. 1,500+ app integrations. $9/mo basic. Build content repurposing pipelines in hours."},
+      {t:"Metricool", d:"Schedule posts to 12+ platforms simultaneously. $18/mo. Essential for any content automation stack."},
+      {t:"Opus Clip", d:"AI turns long YouTube videos into 10 viral clips automatically. $19/mo. Sell this as a service for $500/mo."},
+    ],
+    mistakes: [
+      {t:"Over-automating before testing", d:"Test every automation manually for 1 week before handing to client. A broken automation posts garbage at 3am."},
+      {t:"Charging one-time only", d:"Automation setups break when apps update APIs. This is your reason to charge monthly maintenance. Don't skip it."},
+      {t:"Ignoring micro-creators", d:"Creators with 10K followers pay the same as 1M creators — sometimes more. Don't filter out 'small' clients."},
+    ]
+  },
+  18: {
+    title: "Web3 Gaming Assets",
+    steps: [
+      {t:"Study the market (Week 1)", d:"Research top Web3 games: Illuvium, Axie Infinity, Star Atlas. What assets sell? Characters, weapons, land, skins. Check OpenSea volume."},
+      {t:"Build your asset pipeline (Week 1)", d:"Midjourney v7 → Blender (3D) or Illustrator (2D) → PSD layered file → mint as NFT. First 20 assets = practice."},
+      {t:"Mint first collection (Week 2)", d:"Deploy a 100-piece collection on OpenSea or Magic Eden. Price at 0.01–0.05 ETH. Focus on one game's aesthetic."},
+      {t:"Partner with game studios (Week 3)", d:"Email indie Web3 game studios: 'I create game-ready assets in your art style'. Show 10 samples. Offer first pack free."},
+      {t:"Build generative tool (Month 2+)", d:"Turn your asset pipeline into a $99/mo SaaS for indie game devs using Replicate API. 100 users = $9,900 MRR."},
+    ],
+    tools: [
+      {t:"Midjourney v7", d:"Generate game asset concepts in any art style. Use --tile flag for seamless textures. $10/mo basic plan."},
+      {t:"Magic Eden", d:"Largest NFT marketplace for gaming assets. Lower fees than OpenSea. Better reach for gaming audience."},
+      {t:"Replicate", d:"Run AI models via API. Use to build your own asset generation tool without managing GPU servers."},
+    ],
+    mistakes: [
+      {t:"Minting without an audience", d:"Dropping a collection with 0 followers = 0 sales. Build a Twitter/X audience of 500+ before your first mint."},
+      {t:"Ignoring game compatibility", d:"Assets must match the game's art style and technical specs (polygon count, texture size). Always check before creating."},
+      {t:"Only selling NFTs", d:"NFT market is volatile. Diversify: sell on game asset marketplaces (itch.io, GameDev Market) for stable fiat income."},
+    ]
+  }
+};
+
+let activeRoadmap = 1;
+
+function renderSelector() {
+  const sel = document.getElementById('roadmap-selector');
+  if (!sel) return;
+  sel.innerHTML = Array.from({length:18}, (_,i) => {
+    const n = i+1;
+    return `<button onclick="showRoadmap(${n})" id="rbtn-${n}" style="width:40px;height:40px;border-radius:50%;border:2px solid ${n===activeRoadmap?'#000':'#E5E5E7'};background:${n===activeRoadmap?'#000':'#fff'};color:${n===activeRoadmap?'#fff':'#1A1A1A'};font-weight:700;cursor:pointer;font-size:0.85rem;transition:all 0.2s">${n}</button>`;
+  }).join('');
+}
+
+function showRoadmap(n) {
+  activeRoadmap = n;
+  renderSelector();
+  const d = roadmaps[n];
+  const stepsHtml = d.steps.map((s,i) => `
+    <div class="step">
+      <div class="step-number">${i+1}</div>
+      <div class="step-content"><div class="step-title">${s.t}</div><div class="step-desc">${s.d}</div></div>
+    </div>`).join('');
+  const toolsHtml = d.tools.map(t => `
+    <div class="step">
+      <div class="step-number">📌</div>
+      <div class="step-content"><div class="step-title">${t.t}</div><div class="step-desc">${t.d}</div></div>
+    </div>`).join('');
+  const mistakesHtml = d.mistakes.map(m => `
+    <div class="step">
+      <div class="step-number">❌</div>
+      <div class="step-content"><div class="step-title">${m.t}</div><div class="step-desc">${m.d}</div></div>
+    </div>`).join('');
+  document.getElementById('roadmap-content').innerHTML = `
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#1A1A1A;">Idea #${n}: ${d.title}</div>
+    <div class="roadmap-steps">${stepsHtml}</div>
+    <div class="analytics-block" style="margin-top:24px">
+      <div class="analytics-title">📚 Tools & Resources</div>
+      <div class="roadmap-steps">${toolsHtml}</div>
+    </div>
+    <div class="analytics-block" style="margin-top:16px">
+      <div class="analytics-title">⚠️ Common Mistakes</div>
+      <div class="roadmap-steps">${mistakesHtml}</div>
+    </div>`;
+}
+
+document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoadmap(1); });
+</script>
 
 <footer>
   <p>💡 TrendSpot — Daily ideas to make money. Run <code>python fetch_trends.py</code> daily to get fresh cards</p>
