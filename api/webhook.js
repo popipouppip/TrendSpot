@@ -1,26 +1,36 @@
 const Stripe = require('stripe');
 
+// Required for Stripe signature verification
+export const config = { api: { bodyParser: false } };
+
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end();
 
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
   const sig = req.headers['stripe-signature'];
+  const rawBody = await getRawBody(req);
 
   let event;
   try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (e) {
+    console.error('Webhook signature error:', e.message);
     return res.status(400).send(`Webhook error: ${e.message}`);
   }
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const { userId, plan } = session.metadata;
-
+    const { userId, plan } = session.metadata || {};
+    console.log('Payment success:', { userId, plan });
     if (userId && plan) {
       await updateFirestorePlan(userId, plan);
     }
@@ -39,13 +49,13 @@ async function updateFirestorePlan(userId, plan) {
     scopes: ['https://www.googleapis.com/auth/datastore'],
   });
   const client = await auth.getClient();
-  const token = await client.getAccessToken();
+  const tokenResponse = await client.getAccessToken();
 
   const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/users/${userId}`;
-  await fetch(url, {
+  const response = await fetch(url, {
     method: 'PATCH',
     headers: {
-      'Authorization': `Bearer ${token.token}`,
+      'Authorization': `Bearer ${tokenResponse.token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -55,4 +65,5 @@ async function updateFirestorePlan(userId, plan) {
       }
     }),
   });
+  console.log('Firestore update status:', response.status);
 }
