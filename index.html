@@ -604,6 +604,18 @@
       padding: 20px;
     }
 
+    .card-content { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .card-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; width: fit-content; }
+    .badge-easy { background: #D1FAE5; color: #065F46; }
+    .badge-medium { background: #FEF3C7; color: #92400E; }
+    .badge-hard { background: #FEE2E2; color: #991B1B; }
+    .card-title { font-size: 1.15rem; font-weight: 700; color: #1A1A1A; line-height: 1.3; }
+    .card-why { font-size: 0.85rem; color: #6F6F77; line-height: 1.5; }
+    .card-earn { display: flex; flex-direction: column; gap: 6px; }
+    .earn-item { font-size: 0.82rem; color: #1A1A1A; padding-left: 12px; border-left: 2px solid #000; }
+    .card-income { font-size: 0.9rem; font-weight: 700; color: #000; margin-top: auto; }
+    .card-need { font-size: 0.8rem; color: #9CA3AF; }
+
     /* ANALYTICS BLOCK */
     .analytics-block {
       background: #F5F5F7;
@@ -1098,27 +1110,63 @@
   <div class="cards-grid">
     <div class="card">
       <div class="card-number">1</div>
-      <div class="card-placeholder">Card 1 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">AI Agent Tools</div>
+        <div class="card-why">Autonomous AI agents are replacing human workflows. Market hit $5B in 2025 and is doubling yearly. Every business needs automation.</div>
+        <div class="card-earn"><div class="earn-item">Build no-code AI agents with Make.com + GPT and sell to small businesses</div></div>
+        <div class="card-income">$1,500–4,000/mo</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">2</div>
-      <div class="card-placeholder">Card 2 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">Vibe Coding</div>
+        <div class="card-why">AI-generated apps via prompts went mainstream. 40% of new apps in 2025 built with AI assistance. No coding skills needed anymore.</div>
+        <div class="card-earn"><div class="earn-item">Flip AI-built micro-SaaS tools on Acquire.com or MicroAcquire</div></div>
+        <div class="card-income">$2,000–8,000/mo</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">3</div>
-      <div class="card-placeholder">Card 3 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">Faceless YouTube Channels</div>
+        <div class="card-why">AI voiceover + video tools made faceless channels explode. Top channels earn $10K+/mo with zero on-camera presence.</div>
+        <div class="card-earn"><div class="earn-item">Start a faceless niche channel using ElevenLabs + Runway + ChatGPT scripts</div></div>
+        <div class="card-income">$500–5,000/mo</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">4</div>
-      <div class="card-placeholder">Card 4 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">AI-Powered Newsletters</div>
+        <div class="card-why">Newsletters with AI curation grew 300% in 2025. Beehiiv topped 1M+ creators. Low overhead, high margin business model.</div>
+        <div class="card-earn"><div class="earn-item">Launch a niche newsletter on Beehiiv, monetize with sponsors + paid tier</div></div>
+        <div class="card-income">$1,000–6,000/mo</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">5</div>
-      <div class="card-placeholder">Card 5 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">Print-on-Demand + AI Art</div>
+        <div class="card-why">Midjourney + Printify combo let solo creators sell merch globally. POD market reaches $48B by 2030. Zero inventory risk.</div>
+        <div class="card-earn"><div class="earn-item">Design AI art collections and sell via Etsy + Printify integration</div></div>
+        <div class="card-income">$800–3,000/mo</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">6</div>
-      <div class="card-placeholder">Card 6 — Trend Title<br><br>[Basic info only]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">Prompt Engineering Courses</div>
+        <div class="card-why">Every company needs staff who can use AI tools effectively. Prompt courses on Udemy sell 10K+ copies. Demand still outpaces supply.</div>
+        <div class="card-earn"><div class="earn-item">Create a niche prompt course on Gumroad or Udemy for a specific industry</div></div>
+        <div class="card-income">$1,000–5,000/mo</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1131,32 +1179,88 @@
 
   <div class="cards-grid">
     <div class="card">
-      <div class="card-number">1-6</div>
-      <div class="card-placeholder">All Free Cards<br><br>[Visible in PRO]</div>
-    </div>
-    <div class="card">
       <div class="card-number">7</div>
-      <div class="card-placeholder">Card 7 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">Humanoid Robot Training Data</div>
+        <div class="card-why">Tesla Optimus & Figure AI need massive datasets. Companies pay $30–80/hr for human motion capture. Market growing 400% YoY.</div>
+        <div class="card-earn">
+          <div class="earn-item">Sell motion capture datasets on Scale AI or Remotasks</div>
+          <div class="earn-item">Recruit teams for robot training sessions ($500–2K per session)</div>
+        </div>
+        <div class="card-income">$3,000–10,000/mo</div>
+        <div class="card-need">Laptop + Scale AI account</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">8</div>
-      <div class="card-placeholder">Card 8 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">Local AI Setup Services</div>
+        <div class="card-why">Privacy concerns pushed businesses to run AI locally. Ollama downloads hit 10M+. SMBs pay $500–2K for setup but don't know how.</div>
+        <div class="card-earn">
+          <div class="earn-item">Offer local LLM setup service for law firms, clinics, and finance companies</div>
+          <div class="earn-item">Create setup guides and sell on Gumroad ($49–99)</div>
+        </div>
+        <div class="card-income">$2,000–7,000/mo</div>
+        <div class="card-need">Basic Linux knowledge + Ollama experience</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">9</div>
-      <div class="card-placeholder">Card 9 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">AI Voice Cloning Services</div>
+        <div class="card-why">ElevenLabs hit $1B valuation. Podcasters, YouTubers, and brands need multilingual voice clones. Service demand up 600% since 2024.</div>
+        <div class="card-earn">
+          <div class="earn-item">Offer voice cloning + dubbing packages to content creators ($200–500/video)</div>
+          <div class="earn-item">Build a voice clone library for audiobook publishers</div>
+        </div>
+        <div class="card-income">$2,500–8,000/mo</div>
+        <div class="card-need">ElevenLabs subscription ($22/mo)</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">10</div>
-      <div class="card-placeholder">Card 10 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-easy">Easy</span>
+        <div class="card-title">Crypto Education Content</div>
+        <div class="card-why">Bitcoin hit $120K in early 2026. Millions of new investors need education. Crypto YouTube channels average 500K views/month on basics.</div>
+        <div class="card-earn">
+          <div class="earn-item">Launch a "crypto for beginners" YouTube channel or Substack</div>
+          <div class="earn-item">Sell a beginner crypto course on Gumroad ($49–149)</div>
+        </div>
+        <div class="card-income">$1,500–6,000/mo</div>
+        <div class="card-need">Basic crypto knowledge + video/writing skills</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">11</div>
-      <div class="card-placeholder">Card 11 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">GLP-1 Supplement Niche</div>
+        <div class="card-why">Ozempic demand created a $15B adjacent supplement market. People seek natural alternatives. Affiliate commissions up to 40% per sale.</div>
+        <div class="card-earn">
+          <div class="earn-item">Build a review blog + YouTube channel for GLP-1 alternatives (affiliate)</div>
+          <div class="earn-item">White-label supplement brand targeting weight loss audience</div>
+        </div>
+        <div class="card-income">$2,000–9,000/mo</div>
+        <div class="card-need">Content creation skills + affiliate accounts</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">12</div>
-      <div class="card-placeholder">Card 12 — Trend<br><br>[PRO exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">Solar + Home Battery Consulting</div>
+        <div class="card-why">US solar installations up 45% in 2025. Homeowners confused by tax credits and options. Consultants charge $300–1,000 per assessment.</div>
+        <div class="card-earn">
+          <div class="earn-item">Offer paid solar assessment reports ($199–499 per homeowner)</div>
+          <div class="earn-item">Partner with installers for referral fees ($500–2K per install)</div>
+        </div>
+        <div class="card-income">$3,000–8,000/mo</div>
+        <div class="card-need">Solar basics knowledge + local installer network</div>
+      </div>
     </div>
   </div>
 
@@ -1165,7 +1269,7 @@
     <div class="analytics-grid">
       <div class="analytics-item">
         <div class="analytics-label">Avg Market Size</div>
-        <div class="analytics-value">$X.XB</div>
+        <div class="analytics-value">$47B</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Competition Level</div>
@@ -1173,11 +1277,11 @@
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Entry Difficulty</div>
-        <div class="analytics-value">Easy</div>
+        <div class="analytics-value">Easy–Medium</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Time to Income</div>
-        <div class="analytics-value">1-2 weeks</div>
+        <div class="analytics-value">1–3 weeks</div>
       </div>
     </div>
   </div>
@@ -1191,32 +1295,94 @@
 
   <div class="cards-grid">
     <div class="card">
-      <div class="card-number">1-12</div>
-      <div class="card-placeholder">All Free & PRO Cards<br><br>[Visible in MAXIMUM]</div>
-    </div>
-    <div class="card">
       <div class="card-number">13</div>
-      <div class="card-placeholder">Card 13 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-hard">Hard</span>
+        <div class="card-title">AI SaaS Micro-Tools</div>
+        <div class="card-why">Niche AI tools with one job ($29–99/mo) outperform large platforms. 3,000 users = $100K ARR. Indie hackers building in 2–4 weeks.</div>
+        <div class="card-earn">
+          <div class="earn-item">Build a single-feature AI tool solving one pain point for one industry</div>
+          <div class="earn-item">Launch on Product Hunt + AppSumo for initial traction</div>
+          <div class="earn-item">Sell on Acquire.com once it hits $2K MRR</div>
+        </div>
+        <div class="card-income">$5,000–20,000/mo</div>
+        <div class="card-need">Cursor/Replit + Stripe + basic product sense</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">14</div>
-      <div class="card-placeholder">Card 14 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">AI Data Labeling Agency</div>
+        <div class="card-why">Every AI model needs labeled data. Scale AI pays $15–50/hr. Building a team of labelers and reselling to AI companies = high margin.</div>
+        <div class="card-earn">
+          <div class="earn-item">Recruit 10–20 remote labelers and bid on Scale AI enterprise projects</div>
+          <div class="earn-item">Specialize in medical or legal data for 3x higher rates</div>
+          <div class="earn-item">Offer fixed-price labeling packages to AI startups ($5K–50K/project)</div>
+        </div>
+        <div class="card-income">$8,000–25,000/mo</div>
+        <div class="card-need">Scale AI vendor account + team management skills</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">15</div>
-      <div class="card-placeholder">Card 15 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-hard">Hard</span>
+        <div class="card-title">Digital Twins for SMBs</div>
+        <div class="card-why">Digital twin market hits $110B by 2028. Manufacturers pay $10K–100K for digital replicas of their operations to reduce downtime.</div>
+        <div class="card-earn">
+          <div class="earn-item">Build simple process digital twins for local manufacturers using ThingWorx</div>
+          <div class="earn-item">Offer SaaS monitoring dashboard at $500–2K/mo retainer</div>
+          <div class="earn-item">Partner with IoT hardware vendors for referral income</div>
+        </div>
+        <div class="card-income">$10,000–40,000/mo</div>
+        <div class="card-need">IoT basics + Unity/ThingWorx + B2B sales skills</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">16</div>
-      <div class="card-placeholder">Card 16 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-hard">Hard</span>
+        <div class="card-title">B2B AI Integration Consulting</div>
+        <div class="card-why">Fortune 500s spent $200B+ on AI in 2025. Mid-size companies ($10M–100M revenue) can't afford big consultancies but desperately need help.</div>
+        <div class="card-earn">
+          <div class="earn-item">Offer AI readiness audits at $3K–8K per company</div>
+          <div class="earn-item">Build custom GPT workflows for finance/HR/ops at $500–2K/mo retainer</div>
+          <div class="earn-item">Create productized "AI starter pack" for specific industries at $5K flat</div>
+        </div>
+        <div class="card-income">$15,000–50,000/mo</div>
+        <div class="card-need">Business consulting experience + OpenAI/Claude API skills</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">17</div>
-      <div class="card-placeholder">Card 17 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-medium">Medium</span>
+        <div class="card-title">Creator Economy Automation</div>
+        <div class="card-why">Top creators spend 60% of time on logistics, not content. Tools automating repurposing, scheduling, and analytics sell for $3K–15K setup.</div>
+        <div class="card-earn">
+          <div class="earn-item">Build custom Make.com/Zapier workflows for creators ($1K–3K per client)</div>
+          <div class="earn-item">Sell done-for-you content repurposing retainer ($800–2K/mo)</div>
+          <div class="earn-item">Create a course teaching creators to automate their workflow ($199)</div>
+        </div>
+        <div class="card-income">$5,000–15,000/mo</div>
+        <div class="card-need">Make.com + AI tools + creator network</div>
+      </div>
     </div>
     <div class="card">
       <div class="card-number">18</div>
-      <div class="card-placeholder">Card 18 — Trend<br><br>[MAXIMUM exclusive]</div>
+      <div class="card-content">
+        <span class="card-badge badge-hard">Hard</span>
+        <div class="card-title">Web3 Gaming Assets</div>
+        <div class="card-why">Web3 gaming market rebounds to $65B in 2026. NFT in-game items for top 10 games trade at $500–50K. AI generation cuts creation costs 90%.</div>
+        <div class="card-earn">
+          <div class="earn-item">Design and sell AI-generated game asset packs on OpenSea + GameStop NFT</div>
+          <div class="earn-item">Build a generative asset tool for indie game studios ($99/mo SaaS)</div>
+          <div class="earn-item">Partner with Web3 game studios as exclusive asset designer ($5K–20K/project)</div>
+        </div>
+        <div class="card-income">$4,000–18,000/mo</div>
+        <div class="card-need">Midjourney + Blender basics + crypto wallet</div>
+      </div>
     </div>
   </div>
 
@@ -1225,27 +1391,27 @@
     <div class="analytics-grid">
       <div class="analytics-item">
         <div class="analytics-label">Market Size</div>
-        <div class="analytics-value">$X.XB</div>
+        <div class="analytics-value">$110B+</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Competition</div>
-        <div class="analytics-value">High/Med/Low</div>
+        <div class="analytics-value">Medium</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Entry Barrier</div>
-        <div class="analytics-value">Easy/Med/Hard</div>
+        <div class="analytics-value">Medium–Hard</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Time to Income</div>
-        <div class="analytics-value">X-Y weeks</div>
+        <div class="analytics-value">2–6 weeks</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Initial Budget</div>
-        <div class="analytics-value">$X-Y</div>
+        <div class="analytics-value">$0–500</div>
       </div>
       <div class="analytics-item">
         <div class="analytics-label">Est. Monthly Income</div>
-        <div class="analytics-value">$X-Y</div>
+        <div class="analytics-value">$5K–50K</div>
       </div>
     </div>
   </div>
