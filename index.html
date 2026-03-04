@@ -991,7 +991,7 @@
         <p id="profile-expiry" style="font-size: 1rem; color: #000000; margin-top: 4px;"></p>
       </div>
 
-      <button class="btn-primary" onclick="alert('Coming soon: Upgrade to PRO or MAXIMUM plan')">Upgrade Plan</button>
+      <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); document.getElementById('pro-section').scrollIntoView({behavior:'smooth'})">Upgrade Plan</button>
 
       <button class="btn-logout" onclick="handleSignOut()">Sign Out</button>
     </div>
@@ -2209,11 +2209,18 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       document.getElementById('profile-email').textContent = email;
       document.getElementById('profile-plan').textContent = plan.toUpperCase();
 
+      const upgradeBtn = document.getElementById('profile-upgrade-btn');
       if (plan === 'free') {
         document.getElementById('profile-expiry-section').style.display = 'none';
+        if (upgradeBtn) upgradeBtn.style.display = 'block';
+      } else if (plan === 'pro') {
+        document.getElementById('profile-expiry-section').style.display = 'block';
+        document.getElementById('profile-expiry').textContent = 'Coming soon...';
+        if (upgradeBtn) { upgradeBtn.style.display = 'block'; upgradeBtn.textContent = 'Upgrade to MAXIMUM'; upgradeBtn.onclick = () => { closeProfileModal(); document.getElementById('maximum-section').scrollIntoView({behavior:'smooth'}); }; }
       } else {
         document.getElementById('profile-expiry-section').style.display = 'block';
         document.getElementById('profile-expiry').textContent = 'Coming soon...';
+        if (upgradeBtn) upgradeBtn.style.display = 'none';
       }
 
       updateContentVisibility(plan);
@@ -2283,6 +2290,17 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       closeForgotPasswordModal();
     }
   });
+
+  // ===== PAYMENT SUCCESS HANDLER =====
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('payment') === 'success') {
+    const toast = document.createElement('div');
+    toast.textContent = '🎉 Payment successful! Your plan has been upgraded.';
+    toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#18181B;color:#fff;padding:14px 24px;border-radius:12px;font-size:0.95rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.3);';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
+    history.replaceState({}, '', window.location.pathname);
+  }
 </script>
 
 </body>
