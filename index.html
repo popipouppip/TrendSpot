@@ -539,8 +539,17 @@
     }
 
     .content-locked {
-      opacity: 0.5;
       pointer-events: none;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.35) url('Замок.png') center/52px no-repeat;
+      z-index: 10;
     }
 
     .cards-grid {
@@ -724,6 +733,10 @@
     }
 
     /* LOCKED MESSAGE */
+    .pricing-section:not(.content-locked) .locked-message {
+      display: none;
+    }
+
     .locked-message {
       background: #F5F5F7;
       border: 1px solid #E5E5E7;
@@ -1035,7 +1048,7 @@
         <div class="price-amount">$4.99</div>
         <div class="price-period">/ month</div>
       </div>
-      <button class="btn-primary" style="width:100%;margin-bottom:12px" onclick="startCheckout('pro')">Get PRO</button>
+      <button id="btn-get-pro" class="btn-primary" style="width:100%;margin-bottom:12px" onclick="startCheckout('pro')">Get PRO</button>
       <div class="plan-features">
         <div class="feature">
           <span class="feature-check">✓</span>
@@ -1074,7 +1087,7 @@
         <div class="price-amount">$6.99</div>
         <div class="price-period">/ month</div>
       </div>
-      <button class="btn-primary" style="width:100%;margin-bottom:12px;background:#6F6F77" onclick="startCheckout('maximum')">Get MAXIMUM</button>
+      <button id="btn-get-maximum" class="btn-primary" style="width:100%;margin-bottom:12px;background:#6F6F77" onclick="startCheckout('maximum')">Get MAXIMUM</button>
       <div class="plan-features">
         <div class="feature">
           <span class="feature-check">✓</span>
@@ -2088,17 +2101,46 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   }
 
   // ===== UPDATE UI BASED ON PLAN =====
+  function setLockOverlays(sectionId, locked) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.querySelectorAll('.card').forEach(card => {
+      const existing = card.querySelector('.lock-overlay');
+      if (locked && !existing) {
+        const overlay = document.createElement('div');
+        overlay.className = 'lock-overlay';
+        card.appendChild(overlay);
+      } else if (!locked && existing) {
+        existing.remove();
+      }
+    });
+  }
+
   function updateContentVisibility(plan) {
     userPlan = plan;
 
     document.getElementById('pro-section').classList.add('content-locked');
     document.getElementById('maximum-section').classList.add('content-locked');
+    setLockOverlays('pro-section', true);
+    setLockOverlays('maximum-section', true);
+
+    const btnPro = document.getElementById('btn-get-pro');
+    const btnMax = document.getElementById('btn-get-maximum');
+
+    if (btnPro) { btnPro.textContent = 'Get PRO'; btnPro.disabled = false; btnPro.style.opacity = '1'; btnPro.onclick = () => startCheckout('pro'); }
+    if (btnMax) { btnMax.textContent = 'Get MAXIMUM'; btnMax.disabled = false; btnMax.style.opacity = '1'; btnMax.onclick = () => startCheckout('maximum'); }
 
     if (plan === 'pro') {
       document.getElementById('pro-section').classList.remove('content-locked');
+      setLockOverlays('pro-section', false);
+      if (btnPro) { btnPro.textContent = '✓ Current Plan'; btnPro.disabled = true; btnPro.style.opacity = '0.5'; btnPro.onclick = null; }
     } else if (plan === 'maximum') {
       document.getElementById('pro-section').classList.remove('content-locked');
       document.getElementById('maximum-section').classList.remove('content-locked');
+      setLockOverlays('pro-section', false);
+      setLockOverlays('maximum-section', false);
+      if (btnPro) { btnPro.textContent = '✓ Current Plan'; btnPro.disabled = true; btnPro.style.opacity = '0.5'; btnPro.onclick = null; }
+      if (btnMax) { btnMax.textContent = '✓ Current Plan'; btnMax.disabled = true; btnMax.style.opacity = '0.5'; btnMax.onclick = null; }
     }
   }
 
