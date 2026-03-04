@@ -1,8 +1,6 @@
 const Stripe = require('stripe');
 const { GoogleAuth } = require('google-auth-library');
 
-module.exports.config = { api: { bodyParser: false } };
-
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
