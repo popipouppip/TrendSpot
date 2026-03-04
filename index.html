@@ -662,6 +662,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
+      position: relative;
     }
 
     .analytics-item {
@@ -785,6 +786,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+      position: relative;
     }
 
     .chart-item {
@@ -2147,7 +2149,8 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
     });
 
     const blurTargets = [
-      ...section.querySelectorAll('.analytics-block'),
+      ...section.querySelectorAll('.analytics-grid'),
+      ...section.querySelectorAll('.charts-grid'),
       section.querySelector('#roadmap-content'),
     ].filter(Boolean);
 
