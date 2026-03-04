@@ -1,7 +1,7 @@
 const Stripe = require('stripe');
+const { GoogleAuth } = require('google-auth-library');
 
-// Required for Stripe signature verification
-export const config = { api: { bodyParser: false } };
+module.exports.config = { api: { bodyParser: false } };
 
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -30,20 +30,28 @@ module.exports = async (req, res) => {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const { userId, plan } = session.metadata || {};
-    console.log('Payment success:', { userId, plan });
+    console.log('Payment completed. userId:', userId, 'plan:', plan);
     if (userId && plan) {
-      await updateFirestorePlan(userId, plan);
+      try {
+        await updateFirestorePlan(userId, plan);
+        console.log('Firestore updated successfully');
+      } catch (e) {
+        console.error('Firestore update failed:', e.message);
+      }
+    } else {
+      console.error('Missing metadata. userId:', userId, 'plan:', plan);
     }
   }
 
   res.json({ received: true });
 };
 
+module.exports.config = { api: { bodyParser: false } };
+
 async function updateFirestorePlan(userId, plan) {
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-  const { GoogleAuth } = require('google-auth-library');
   const auth = new GoogleAuth({
     credentials: serviceAccount,
     scopes: ['https://www.googleapis.com/auth/datastore'],
@@ -65,5 +73,9 @@ async function updateFirestorePlan(userId, plan) {
       }
     }),
   });
-  console.log('Firestore update status:', response.status);
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Firestore error ${response.status}: ${text}`);
+  }
 }
