@@ -556,14 +556,12 @@
       position: absolute;
       inset: 0;
       border-radius: 10px;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      background: rgba(245,245,247,0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(245,245,247,0.93);
       z-index: 10;
       pointer-events: none;
     }
-
-    .content-locked #roadmap-selector { pointer-events: auto; }
 
     .cards-grid {
       display: grid;
@@ -2151,6 +2149,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
     const blurTargets = [
       ...section.querySelectorAll('.analytics-grid'),
       ...section.querySelectorAll('.charts-grid'),
+      section.querySelector('#roadmap-selector'),
       section.querySelector('#roadmap-content'),
     ].filter(Boolean);
 
