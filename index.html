@@ -866,6 +866,115 @@
         margin: 20px;
       }
     }
+
+    /* ===== DARK THEME ===== */
+    :root {
+      --bg: #0C0C10;
+      --bg2: #18181D;
+      --bg3: #1F1F27;
+      --border: #2A2A38;
+      --border-bright: #38384A;
+      --text: #EDEDF2;
+      --text2: #8888A0;
+      --accent: #7C7CFA;
+    }
+
+    body { background: var(--bg); color: var(--text); }
+
+    header { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .logo { color: var(--text); }
+    .logo-icon { filter: brightness(1.2); }
+
+    .user-avatar { background: var(--bg2); border-color: var(--border); color: var(--text); }
+    .user-avatar:hover { background: var(--bg3); }
+    .btn-auth { background: var(--text); color: var(--bg); }
+    .btn-auth:hover { background: #ccccd8; }
+    .btn-logout { background: var(--bg2); color: var(--text); border-color: var(--border); }
+    .btn-logout:hover { background: var(--bg3); }
+
+    .modal-content { background: var(--bg2); border: 1px solid var(--border); box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+    .modal-title, .form-group label { color: var(--text); }
+    .modal-tabs { border-bottom-color: var(--border); }
+    .modal-tab { color: var(--text2); }
+    .modal-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+    .modal-close { color: var(--text2); }
+    .form-group input { background: var(--bg3); border-color: var(--border); color: var(--text); }
+    .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,124,250,0.15); }
+    .form-group input::placeholder { color: var(--text2); }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-primary:hover { background: #d0d0e0; }
+    .btn-google { background: var(--bg3); color: var(--text); border-color: var(--border); }
+    .btn-google:hover { background: var(--border); }
+    .modal-divider { color: var(--text2); }
+
+    .top-banner { background: var(--bg2); border-bottom-color: var(--border); }
+    .banner-title { color: var(--text); }
+    .banner-subtitle { color: var(--text2); }
+    .banner-motivation { background: var(--bg3); border-color: var(--border); color: var(--text); }
+
+    .hero h1 { color: var(--text); }
+    .hero p { color: var(--text2); }
+
+    .section-title { color: var(--text); }
+
+    .plan-card { background: var(--bg2); border: 1px solid var(--border); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+    .plan-card:hover { border-color: var(--border-bright); box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07); }
+    .plan-card.featured { background: #1a1a28; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), inset 0 1px 0 rgba(124,124,250,0.1); }
+    .plan-header { border-bottom-color: var(--border); }
+    .plan-name { color: var(--text); }
+    .plan-badge.free { background: var(--bg3); color: var(--text2); border-color: var(--border); }
+    .plan-badge.pro, .plan-badge.max { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .price-amount { color: var(--text); }
+    .price-period { color: var(--text2); }
+    .feature { color: var(--text); }
+    .feature-check { color: var(--accent); }
+    .feature.disabled { color: var(--text2); }
+    .feature.disabled .feature-check { color: var(--text2); }
+
+    .content-title { color: var(--text); border-bottom: 1px solid var(--border); }
+    .content-title::after { content:''; display:block; width:40px; height:2px; background:var(--accent); margin-top:2px; }
+
+    .card { background: var(--bg2); border: 1px solid var(--border); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+    .card:hover { border-color: var(--border-bright); box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.07); }
+    .card-number { color: var(--border); }
+    .card-placeholder { background: var(--bg3); border-color: var(--border); color: var(--text2); }
+    .card-title { color: var(--text); }
+    .card-why { color: var(--text2); }
+    .earn-item { color: var(--text); border-left-color: var(--accent); }
+    .card-income { color: var(--text); }
+    .card-need { color: var(--text2); }
+    .badge-easy { background: rgba(16,185,129,0.15); color: #34D399; }
+    .badge-medium { background: rgba(245,158,11,0.15); color: #FCD34D; }
+    .badge-hard { background: rgba(239,68,68,0.15); color: #FCA5A5; }
+
+    .analytics-block { background: var(--bg2); border: 1px solid var(--border); }
+    .analytics-title { color: var(--text); }
+    .analytics-item { background: var(--bg3); border: 1px solid var(--border); }
+    .analytics-label { color: var(--text2); }
+    .analytics-value { color: var(--text); }
+
+    .roadmap-block { background: var(--bg2); border: 1px solid var(--border); }
+    .roadmap-title { color: var(--text); }
+    .step { background: var(--bg3); border-left: 3px solid var(--accent); border: 1px solid var(--border); border-left: 3px solid var(--accent); }
+    .step-number { color: var(--accent); }
+    .step-title { color: var(--text); }
+    .step-desc { color: var(--text2); }
+
+    .charts-block { background: var(--bg2); border: 1px solid var(--border); }
+    .charts-title { color: var(--text); }
+    .chart-item { background: var(--bg3); border: 1px solid var(--border); }
+    .chart-label { color: var(--text); }
+
+    .locked-message { background: var(--bg2); border-color: var(--border); color: var(--text2); }
+
+    .lock-overlay { background: rgba(12,12,16,0.88) url('/lock.png') center/48px no-repeat; }
+    .blur-overlay { background: rgba(12,12,16,0.93); }
+
+    footer { background: var(--bg); border-top-color: var(--border); color: var(--text2); }
+
+    /* Decorative section separator line */
+    .pricing-section { border-top: 1px solid var(--border); }
+    .pricing-section + .pricing-section { border-top: 1px solid var(--border); }
   </style>
 </head>
 <body>
@@ -1524,8 +1633,8 @@
   </div>
 
   <div class="roadmap-block">
-    <div class="roadmap-title">🎯 Step-by-Step Earning Roadmap</div>
-    <div class="roadmap-title" style="font-size:0.9rem;font-weight:400;color:#6F6F77;margin-top:-10px;">Choose an idea to see its roadmap:</div>
+    <div class="roadmap-title">🎯 Step-by-Step Earning Roadmap <span style="font-size:0.75rem;font-weight:700;background:var(--accent,#7C7CFA);color:#fff;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:8px;">16 unique</span></div>
+    <div class="roadmap-title" style="font-size:0.9rem;font-weight:400;color:#6F6F77;margin-top:-10px;">Choose one of 16 different roadmaps:</div>
     <div id="roadmap-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px;"></div>
     <div id="roadmap-content"></div>
   </div>
