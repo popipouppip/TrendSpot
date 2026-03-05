@@ -132,7 +132,7 @@
       color: #FFFFFF;
       border: none;
       padding: 10px 20px;
-      border-radius: 10px;
+      border-radius: 4px;
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
@@ -148,7 +148,7 @@
       color: #000000;
       border: 1px solid #E5E5E7;
       padding: 8px 16px;
-      border-radius: 8px;
+      border-radius: 4px;
       font-size: 0.85rem;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -178,7 +178,7 @@
 
     .modal-content {
       background: #FFFFFF;
-      border-radius: 20px;
+      border-radius: 6px;
       padding: 40px;
       width: 100%;
       max-width: 450px;
@@ -257,7 +257,7 @@
       color: #FFFFFF;
       border: none;
       padding: 14px 20px;
-      border-radius: 10px;
+      border-radius: 4px;
       font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
@@ -278,7 +278,7 @@
       color: #000000;
       border: 1px solid #E5E5E7;
       padding: 14px 20px;
-      border-radius: 10px;
+      border-radius: 4px;
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
@@ -421,7 +421,7 @@
     .plan-card {
       background: #FFFFFF;
       border: 2px solid #E5E5E7;
-      border-radius: 20px;
+      border-radius: 6px;
       padding: 40px;
       display: flex;
       flex-direction: column;
@@ -460,7 +460,7 @@
       font-weight: 700;
       text-transform: uppercase;
       padding: 6px 14px;
-      border-radius: 20px;
+      border-radius: 4px;
       letter-spacing: 1px;
     }
 
@@ -589,7 +589,7 @@
     .card {
       background: #FFFFFF;
       border: 1px solid #E5E5E7;
-      border-radius: 14px;
+      border-radius: 6px;
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -643,7 +643,7 @@
     .analytics-block {
       background: #F5F5F7;
       border: 1px solid #E5E5E7;
-      border-radius: 14px;
+      border-radius: 6px;
       padding: 28px;
       margin-bottom: 30px;
       position: relative;
@@ -669,7 +669,7 @@
     .analytics-item {
       background: #FFFFFF;
       border: 1px solid #E5E5E7;
-      border-radius: 10px;
+      border-radius: 4px;
       padding: 20px;
       text-align: center;
     }
@@ -693,7 +693,7 @@
     .roadmap-block {
       background: #F5F5F7;
       border: 1px solid #E5E5E7;
-      border-radius: 14px;
+      border-radius: 6px;
       padding: 28px;
       margin-bottom: 30px;
     }
@@ -717,7 +717,7 @@
     .step {
       background: #FFFFFF;
       border-left: 4px solid #000000;
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 16px;
       display: flex;
       gap: 16px;
@@ -768,7 +768,7 @@
     .charts-block {
       background: #F5F5F7;
       border: 1px solid #E5E5E7;
-      border-radius: 14px;
+      border-radius: 6px;
       padding: 28px;
       margin-bottom: 30px;
     }
@@ -793,7 +793,7 @@
     .chart-item {
       background: #FFFFFF;
       border: 1px solid #E5E5E7;
-      border-radius: 10px;
+      border-radius: 4px;
       padding: 20px;
     }
 
@@ -910,23 +910,29 @@
     .btn-google:hover { background: var(--border); }
     .modal-divider { color: var(--text2); }
 
-    .top-banner { background: var(--bg2); border-bottom-color: var(--border); }
-    .banner-title { color: var(--text); }
-    .banner-subtitle { color: var(--text2); }
-    .banner-motivation { background: var(--bg3); border-color: var(--border); color: var(--text); }
+    .top-banner { background: linear-gradient(180deg, #0d0d1e 0%, var(--bg) 100%); border-bottom: 1px solid var(--accent); padding: 50px 40px; }
+    .banner-title { color: var(--text); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; }
+    .banner-subtitle { color: var(--text2); font-size: 1rem; }
 
-    .hero h1 { color: var(--text); }
+    .hero h1 { background: linear-gradient(135deg, #fff 0%, #7C7CFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero p { color: var(--text2); }
 
     .section-title { color: var(--text); }
 
-    .plan-card { background: var(--bg2); border: 1px solid var(--border); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
-    .plan-card:hover { border-color: var(--border-bright); box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07); }
-    .plan-card.featured { background: #1a1a28; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), inset 0 1px 0 rgba(124,124,250,0.1); }
+    .plan-card { background: #0d1920; border: 2px solid #00CFFF; box-shadow: 0 0 16px rgba(0,207,255,0.12); }
+    .plan-card:hover { border-color: #00E5FF; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 24px rgba(0,207,255,0.2); }
+    .plan-card.featured { background: #110D1E; border: 2px solid #8B5CF6; box-shadow: 0 0 24px rgba(139,92,246,0.25), 0 0 0 1px #8B5CF6; }
+    .plan-card.featured:hover { border-color: #A78BFA; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 32px rgba(139,92,246,0.35); }
+    .plan-card.max-card { background: #1a1200; border: 2px solid #F59E0B; box-shadow: 0 0 16px rgba(245,158,11,0.15); }
+    .plan-card.max-card:hover { border-color: #FBBF24; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 24px rgba(245,158,11,0.25); }
     .plan-header { border-bottom-color: var(--border); }
     .plan-name { color: var(--text); }
-    .plan-badge.free { background: var(--bg3); color: var(--text2); border-color: var(--border); }
-    .plan-badge.pro, .plan-badge.max { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .plan-card:not(.featured):not(.max-card) .feature-check { color: #00CFFF; }
+    .plan-card.featured .feature-check { color: #A78BFA; }
+    .plan-card.max-card .feature-check { color: #FBBF24; }
+    .plan-badge.free { background: rgba(0,207,255,0.15); color: #00CFFF; border-color: rgba(0,207,255,0.4); }
+    .plan-badge.pro { background: rgba(139,92,246,0.2); color: #A78BFA; border-color: rgba(139,92,246,0.5); }
+    .plan-badge.max { background: rgba(245,158,11,0.2); color: #FBBF24; border-color: rgba(245,158,11,0.5); }
     .price-amount { color: var(--text); }
     .price-period { color: var(--text2); }
     .feature { color: var(--text); }
@@ -1113,7 +1119,6 @@
 <div class="top-banner">
   <div class="banner-title">📊 Daily trends with concrete ways to profit from them</div>
   <div class="banner-subtitle">Fresh opportunities every day analyzed and explained for you</div>
-  <div class="banner-motivation">💡 I built this in one week — You can do it too!</div>
 </div>
 
 <div class="hero">
@@ -1204,7 +1209,7 @@
     </div>
 
     <!-- MAXIMUM PLAN -->
-    <div class="plan-card">
+    <div class="plan-card max-card">
       <div class="plan-header">
         <div class="plan-name">MAXIMUM</div>
         <div class="plan-badge max">PREMIUM</div>
