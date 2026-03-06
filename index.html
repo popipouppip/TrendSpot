@@ -1113,6 +1113,7 @@
 
       <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); document.getElementById('pro-section').scrollIntoView({behavior:'smooth'})">Upgrade Plan</button>
 
+      <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()">🔗 Copy referral link</button>
       <button class="btn-logout" onclick="handleSignOut()">Sign Out</button>
     </div>
   </div>
@@ -2078,7 +2079,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email })
+        body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email, referrerUid: localStorage.getItem('ref') || undefined })
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
@@ -2409,6 +2410,31 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       closeForgotPasswordModal();
     }
   });
+
+  // ===== REFERRAL LINK HANDLER =====
+  (function() {
+    const p = new URLSearchParams(window.location.search);
+    const ref = p.get('ref');
+    if (ref) {
+      localStorage.setItem('ref', ref);
+      history.replaceState({}, '', window.location.pathname);
+      const banner = document.createElement('div');
+      banner.textContent = '🎉 You got 50% off your first month via referral!';
+      banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#7C7CFA;color:#fff;padding:12px 24px;border-radius:12px;font-size:0.9rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.4);';
+      document.body.appendChild(banner);
+      setTimeout(() => banner.remove(), 5000);
+    }
+  })();
+
+  function copyReferralLink() {
+    if (!currentUser) return;
+    const link = window.location.origin + '/?ref=' + currentUser.uid;
+    navigator.clipboard.writeText(link).then(() => {
+      const btn = document.getElementById('profile-ref-btn');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.textContent = '🔗 Copy referral link'; }, 2000);
+    });
+  }
 
   // ===== PAYMENT SUCCESS HANDLER =====
   const params = new URLSearchParams(window.location.search);

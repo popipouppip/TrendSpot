@@ -27,17 +27,25 @@ module.exports = async (req, res) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const { userId, plan } = session.metadata || {};
-    console.log('Payment completed. userId:', userId, 'plan:', plan);
+    const { userId, plan, referrerUid } = session.metadata || {};
+    const stripeCustomerId = session.customer;
+
     if (userId && plan) {
       try {
-        await updateFirestorePlan(userId, plan);
-        console.log('Firestore updated successfully');
+        await updateFirestoreUser(userId, { plan, stripeCustomerId });
+        console.log('Firestore updated: userId', userId, 'plan', plan);
       } catch (e) {
         console.error('Firestore update failed:', e.message);
       }
-    } else {
-      console.error('Missing metadata. userId:', userId, 'plan:', plan);
+    }
+
+    if (referrerUid) {
+      try {
+        await applyReferrerDiscount(stripe, referrerUid);
+        console.log('Referrer discount applied:', referrerUid);
+      } catch (e) {
+        console.error('Referrer discount failed:', e.message);
+      }
     }
   }
 
@@ -46,34 +54,56 @@ module.exports = async (req, res) => {
 
 module.exports.config = { api: { bodyParser: false } };
 
-async function updateFirestorePlan(userId, plan) {
-  const projectId = process.env.FIREBASE_PROJECT_ID;
+async function getFirestoreToken() {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
   const auth = new GoogleAuth({
     credentials: serviceAccount,
     scopes: ['https://www.googleapis.com/auth/datastore'],
   });
   const client = await auth.getClient();
   const tokenResponse = await client.getAccessToken();
+  return { projectId: process.env.FIREBASE_PROJECT_ID, token: tokenResponse.token };
+}
+
+async function updateFirestoreUser(userId, data) {
+  const { projectId, token } = await getFirestoreToken();
+  const fields = { plan_updated_at: { timestampValue: new Date().toISOString() } };
+  if (data.plan) fields.plan = { stringValue: data.plan };
+  if (data.stripeCustomerId) fields.stripeCustomerId = { stringValue: data.stripeCustomerId };
 
   const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/users/${userId}`;
   const response = await fetch(url, {
     method: 'PATCH',
-    headers: {
-      'Authorization': `Bearer ${tokenResponse.token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      fields: {
-        plan: { stringValue: plan },
-        plan_updated_at: { timestampValue: new Date().toISOString() },
-      }
-    }),
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields }),
   });
+  if (!response.ok) throw new Error(`Firestore error ${response.status}: ${await response.text()}`);
+}
 
-  if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`Firestore error ${response.status}: ${text}`);
+async function getFirestoreUser(userId) {
+  const { projectId, token } = await getFirestoreToken();
+  const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/users/${userId}`;
+  const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+  if (!response.ok) return null;
+  const data = await response.json();
+  return data.fields || null;
+}
+
+async function applyReferrerDiscount(stripe, referrerUid) {
+  const fields = await getFirestoreUser(referrerUid);
+  const customerId = fields?.stripeCustomerId?.stringValue;
+  if (!customerId) {
+    console.log('Referrer has no stripeCustomerId, skipping discount');
+    return;
   }
+
+  const subscriptions = await stripe.subscriptions.list({ customer: customerId, status: 'active', limit: 1 });
+  if (!subscriptions.data.length) {
+    console.log('Referrer has no active subscription');
+    return;
+  }
+
+  await stripe.subscriptions.update(subscriptions.data[0].id, {
+    discounts: [{ coupon: 'REFER50' }],
+  });
 }
