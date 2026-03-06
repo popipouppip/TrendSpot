@@ -1252,6 +1252,17 @@
   </div>
 </div>
 
+<!-- REFERRAL BANNER -->
+<div style="max-width:860px;margin:0 auto 48px;padding:0 40px;">
+  <div style="background:linear-gradient(135deg,rgba(124,124,250,0.12) 0%,rgba(124,124,250,0.04) 100%);border:1px solid rgba(124,124,250,0.35);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text,#EDEDF2);margin-bottom:6px;">🔗 Invite a friend — both get 50% off</div>
+      <div style="font-size:0.88rem;color:var(--text2,#8888A0);line-height:1.5;">Share your referral link. When a friend subscribes, they get 50% off their first month — and so do you, automatically.</div>
+    </div>
+    <button onclick="handleReferralBannerClick()" style="background:var(--accent,#7C7CFA);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:inherit;font-size:0.9rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;" id="banner-ref-btn">Copy my referral link</button>
+  </div>
+</div>
+
 <!-- FREE SECTION -->
 <div class="pricing-section" id="free-section">
   <div class="content-title">📌 FREE PLAN — 6 Cards Per Day</div>
@@ -2425,6 +2436,16 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       setTimeout(() => banner.remove(), 5000);
     }
   })();
+
+  function handleReferralBannerClick() {
+    if (!currentUser) { openAuthModal(); return; }
+    const btn = document.getElementById('banner-ref-btn');
+    const link = window.location.origin + '/?ref=' + currentUser.uid;
+    navigator.clipboard.writeText(link).then(() => {
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.textContent = 'Copy my referral link'; }, 2000);
+    });
+  }
 
   function copyReferralLink() {
     if (!currentUser) return;
