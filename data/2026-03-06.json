@@ -1,0 +1,167 @@
+{
+  "date": "2026-03-06",
+  "cards": [
+    {
+      "title": "AI Agent Tools",
+      "why_trending": "Autonomous AI agents are replacing human workflows. Market hit $5B in 2025 and is doubling yearly. Every business needs automation.",
+      "ways_to_earn": ["Build no-code AI agents with Make.com + GPT and sell to small businesses", "Offer agent setup as a service for $500–2K per client"],
+      "difficulty": "Easy",
+      "income_estimate": "$1,500–4,000/mo",
+      "what_you_need": "Make.com account + ChatGPT API",
+      "topic": "AI Agent Tools"
+    },
+    {
+      "title": "Vibe Coding",
+      "why_trending": "AI-generated apps via prompts went mainstream. 40% of new apps in 2025 built with AI assistance. No coding skills needed anymore.",
+      "ways_to_earn": ["Flip AI-built micro-SaaS tools on Acquire.com or MicroAcquire", "Build and sell landing pages for $200–800 each"],
+      "difficulty": "Easy",
+      "income_estimate": "$2,000–8,000/mo",
+      "what_you_need": "Cursor or Replit account",
+      "topic": "Vibe Coding"
+    },
+    {
+      "title": "Faceless YouTube Channels",
+      "why_trending": "AI voiceover + video tools made faceless channels explode. Top channels earn $10K+/mo with zero on-camera presence.",
+      "ways_to_earn": ["Start a faceless niche channel using ElevenLabs + Runway + ChatGPT scripts"],
+      "difficulty": "Easy",
+      "income_estimate": "$500–5,000/mo",
+      "what_you_need": "ElevenLabs + basic video editing",
+      "topic": "Faceless YouTube"
+    },
+    {
+      "title": "AI-Powered Newsletters",
+      "why_trending": "Newsletters with AI curation grew 300% in 2025. Beehiiv topped 1M+ creators. Low overhead, high margin business model.",
+      "ways_to_earn": ["Launch a niche newsletter on Beehiiv, monetize with sponsors + paid tier"],
+      "difficulty": "Easy",
+      "income_estimate": "$1,000–6,000/mo",
+      "what_you_need": "Beehiiv free account",
+      "topic": "AI Newsletters"
+    },
+    {
+      "title": "Print-on-Demand + AI Art",
+      "why_trending": "Midjourney + Printify combo let solo creators sell merch globally. POD market reaches $48B by 2030. Zero inventory risk.",
+      "ways_to_earn": ["Design AI art collections and sell via Etsy + Printify integration"],
+      "difficulty": "Easy",
+      "income_estimate": "$800–3,000/mo",
+      "what_you_need": "Midjourney + Printify + Etsy account",
+      "topic": "Print-on-Demand"
+    },
+    {
+      "title": "Prompt Engineering Courses",
+      "why_trending": "Every company needs staff who can use AI tools effectively. Prompt courses on Udemy sell 10K+ copies. Demand still outpaces supply.",
+      "ways_to_earn": ["Create a niche prompt course on Gumroad or Udemy for a specific industry"],
+      "difficulty": "Easy",
+      "income_estimate": "$1,000–5,000/mo",
+      "what_you_need": "ChatGPT knowledge + Gumroad account",
+      "topic": "Prompt Engineering"
+    },
+    {
+      "title": "Humanoid Robot Training Data",
+      "why_trending": "Tesla Optimus & Figure AI need massive datasets. Companies pay $30–80/hr for human motion capture. Market growing 400% YoY.",
+      "ways_to_earn": ["Sell motion capture datasets on Scale AI or Remotasks", "Recruit teams for robot training sessions ($500–2K per session)"],
+      "difficulty": "Medium",
+      "income_estimate": "$3,000–10,000/mo",
+      "what_you_need": "Laptop + Scale AI account",
+      "topic": "Robot Training Data"
+    },
+    {
+      "title": "Local AI Setup Services",
+      "why_trending": "Privacy concerns pushed businesses to run AI locally. Ollama downloads hit 10M+. SMBs pay $500–2K for setup but don't know how.",
+      "ways_to_earn": ["Offer local LLM setup service for law firms, clinics, and finance companies", "Create setup guides and sell on Gumroad ($49–99)"],
+      "difficulty": "Medium",
+      "income_estimate": "$2,000–7,000/mo",
+      "what_you_need": "Basic Linux knowledge + Ollama experience",
+      "topic": "Local AI Setup"
+    },
+    {
+      "title": "AI Voice Cloning Services",
+      "why_trending": "ElevenLabs hit $1B valuation. Podcasters, YouTubers, and brands need multilingual voice clones. Service demand up 600% since 2024.",
+      "ways_to_earn": ["Offer voice cloning + dubbing packages to content creators ($200–500/video)", "Build a voice clone library for audiobook publishers"],
+      "difficulty": "Medium",
+      "income_estimate": "$2,500–8,000/mo",
+      "what_you_need": "ElevenLabs subscription ($22/mo)",
+      "topic": "AI Voice Cloning"
+    },
+    {
+      "title": "Crypto Education Content",
+      "why_trending": "Bitcoin hit $120K in early 2026. Millions of new investors need education. Crypto YouTube channels average 500K views/month on basics.",
+      "ways_to_earn": ["Launch a 'crypto for beginners' YouTube channel or Substack", "Sell a beginner crypto course on Gumroad ($49–149)"],
+      "difficulty": "Easy",
+      "income_estimate": "$1,500–6,000/mo",
+      "what_you_need": "Basic crypto knowledge + video/writing skills",
+      "topic": "Crypto Education"
+    },
+    {
+      "title": "GLP-1 Supplement Niche",
+      "why_trending": "Ozempic demand created a $15B adjacent supplement market. People seek natural alternatives. Affiliate commissions up to 40% per sale.",
+      "ways_to_earn": ["Build a review blog + YouTube channel for GLP-1 alternatives (affiliate)", "White-label supplement brand targeting weight loss audience"],
+      "difficulty": "Medium",
+      "income_estimate": "$2,000–9,000/mo",
+      "what_you_need": "Content creation skills + affiliate accounts",
+      "topic": "GLP-1 Supplements"
+    },
+    {
+      "title": "Solar + Home Battery Consulting",
+      "why_trending": "US solar installations up 45% in 2025. Homeowners confused by tax credits and options. Consultants charge $300–1,000 per assessment.",
+      "ways_to_earn": ["Offer paid solar assessment reports ($199–499 per homeowner)", "Partner with installers for referral fees ($500–2K per install)"],
+      "difficulty": "Medium",
+      "income_estimate": "$3,000–8,000/mo",
+      "what_you_need": "Solar basics knowledge + local installer network",
+      "topic": "Solar Consulting"
+    },
+    {
+      "title": "AI SaaS Micro-Tools",
+      "why_trending": "Solo founders are building niche AI tools that solve one problem. Micro-SaaS with 50–200 users generates $3K–15K/mo recurring revenue.",
+      "ways_to_earn": ["Build a single-feature AI tool using Claude or GPT API and charge $9–49/mo", "Sell to a niche (lawyers, designers, coaches) for premium pricing"],
+      "difficulty": "Hard",
+      "income_estimate": "$3,000–15,000/mo",
+      "what_you_need": "Basic coding or no-code tools (Bubble/Glide) + API access",
+      "topic": "AI SaaS"
+    },
+    {
+      "title": "AI Data Labeling Agency",
+      "why_trending": "Every AI model needs labeled data. Market is $5B+ and growing 25% yearly. Startups outsource labeling — they need reliable partners.",
+      "ways_to_earn": ["Start a labeling micro-agency, source work from Scale AI + Toloka", "Offer fixed-price labeling packages to AI startups ($5K–50K/project)"],
+      "difficulty": "Hard",
+      "income_estimate": "$5,000–20,000/mo",
+      "what_you_need": "Team of 5–10 labelers + quality control process",
+      "topic": "Data Labeling"
+    },
+    {
+      "title": "Digital Twins for SMBs",
+      "why_trending": "Digital twin technology moved from enterprise to SMBs. Restaurants, retail, and logistics save 20–35% on ops with AI simulations.",
+      "ways_to_earn": ["Offer digital twin consulting for restaurants and retail shops", "Build simple digital twins using Python + AI and charge $2K–10K"],
+      "difficulty": "Hard",
+      "income_estimate": "$5,000–18,000/mo",
+      "what_you_need": "Data modeling skills + industry knowledge",
+      "topic": "Digital Twins"
+    },
+    {
+      "title": "B2B AI Integration Consulting",
+      "why_trending": "90% of companies want AI but 70% don't know how to implement it. Consultants charge $150–400/hr. Demand exceeds supply in every sector.",
+      "ways_to_earn": ["Offer AI readiness audits to SMBs ($500–2K per audit)", "Build retainer consulting deals ($3K–10K/mo per client)"],
+      "difficulty": "Hard",
+      "income_estimate": "$8,000–25,000/mo",
+      "what_you_need": "AI tools knowledge + B2B sales skills",
+      "topic": "B2B AI Consulting"
+    },
+    {
+      "title": "Creator Economy Automation",
+      "why_trending": "Content creators spend 40% of time on non-creative tasks. Tools that automate scheduling, editing, and analytics command $50–200/mo subscriptions.",
+      "ways_to_earn": ["Build an automation workflow for creators using Zapier + AI (sell as a service)", "Create a niche automation SaaS for a specific creator type (podcasters, streamers)"],
+      "difficulty": "Hard",
+      "income_estimate": "$4,000–12,000/mo",
+      "what_you_need": "Zapier/Make.com expertise + content creator network",
+      "topic": "Creator Automation"
+    },
+    {
+      "title": "Web3 Gaming Assets",
+      "why_trending": "Web3 gaming market rebounds to $65B in 2026. NFT in-game items for top 10 games trade at $500–50K. AI generation cuts creation costs 90%.",
+      "ways_to_earn": ["Create and sell AI-generated in-game NFT assets on OpenSea or Blur", "Build character skin packs for popular Web3 games on commission"],
+      "difficulty": "Hard",
+      "income_estimate": "$2,000–10,000/mo",
+      "what_you_need": "Midjourney + basic 3D skills + crypto wallet",
+      "topic": "Web3 Gaming"
+    }
+  ]
+}

@@ -1332,7 +1332,7 @@
 </div>
 
 <!-- PRO SECTION -->
-<div class="pricing-section" id="pro-section" class="content-locked">
+<div class="pricing-section content-locked" id="pro-section">
   <div class="content-title">⭐ PRO PLAN — 12+ Cards + Analytics</div>
 
   <div class="locked-message">🔒 Upgrade to PRO to see all cards and analytics</div>
@@ -1456,7 +1456,7 @@
 </div>
 
 <!-- MAXIMUM SECTION -->
-<div class="pricing-section" id="maximum-section" class="content-locked">
+<div class="pricing-section content-locked" id="maximum-section">
   <div class="content-title">🚀 MAXIMUM PLAN — 18+ Cards + Full Analysis + Roadmap</div>
 
   <div class="locked-message">🔒 Upgrade to MAXIMUM to unlock complete roadmaps and step-by-step guides</div>
@@ -2069,7 +2069,48 @@ function showRoadmap(n) {
     </div>`;
 }
 
-document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoadmap(1); });
+function badgeClass(d) { return d === 'Easy' ? 'badge-easy' : d === 'Medium' ? 'badge-medium' : 'badge-hard'; }
+
+function buildCard(card, index) {
+  const earns = card.ways_to_earn.map(e => `<div class="earn-item">${e}</div>`).join('');
+  const needHtml = card.what_you_need ? `<div class="card-need">${card.what_you_need}</div>` : '';
+  return `<div class="card">
+    <div class="card-number">${index}</div>
+    <div class="card-content">
+      <span class="card-badge ${badgeClass(card.difficulty)}">${card.difficulty}</span>
+      <div class="card-title">${card.title}</div>
+      <div class="card-why">${card.why_trending}</div>
+      <div class="card-earn">${earns}</div>
+      <div class="card-income">${card.income_estimate}</div>
+      ${needHtml}
+    </div>
+  </div>`;
+}
+
+async function loadCardsFromData() {
+  const today = new Date();
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(today); d.setDate(today.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    try {
+      const res = await fetch(`data/${dateStr}.json`);
+      if (!res.ok) continue;
+      const json = await res.json();
+      const cards = json.cards || [];
+      if (!cards.length) continue;
+      const freeGrid = document.querySelector('#free-section .cards-grid');
+      if (freeGrid) freeGrid.innerHTML = cards.slice(0,6).map((c,i) => buildCard(c, i+1)).join('');
+      const proGrid = document.querySelector('#pro-section .cards-grid');
+      if (proGrid && cards.length > 6) proGrid.innerHTML = cards.slice(6,12).map((c,i) => buildCard(c, i+7)).join('');
+      const maxGrid = document.querySelector('#maximum-section .cards-grid');
+      if (maxGrid && cards.length > 12) maxGrid.innerHTML = cards.slice(12,18).map((c,i) => buildCard(c, i+13)).join('');
+      console.log(`Loaded cards from ${dateStr}.json`);
+      break;
+    } catch(e) { continue; }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoadmap(1); loadCardsFromData(); });
 </script>
 
 <footer>
