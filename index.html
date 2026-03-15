@@ -158,6 +158,21 @@
       background: #E5E5E7;
     }
 
+    .cancel-reason {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #E5E5E7;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .cancel-reason:has(input:checked) { border-color: #ef4444; background: rgba(239,68,68,0.05); }
+    .cancel-reason input { accent-color: #ef4444; }
+
+
     /* MODAL */
     .modal {
       display: none;
@@ -1119,6 +1134,27 @@
       <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()"><i data-lucide="link-2"></i> Copy referral link</button>
       <button id="profile-cancel-btn" class="btn-logout" style="display:none;border-color:#ef4444;color:#ef4444;" onclick="handleCancelSubscription()"><i data-lucide="x-circle"></i> Cancel Subscription</button>
       <button class="btn-logout" onclick="handleSignOut()">Sign Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- CANCEL SUBSCRIPTION MODAL -->
+<div class="modal" id="cancel-modal">
+  <div class="modal-content" style="position:relative;max-width:460px;">
+    <button class="modal-close" onclick="closeCancelModal()">✕</button>
+    <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:6px;">Cancel subscription?</h2>
+    <p style="font-size:0.88rem;color:#6F6F77;margin-bottom:20px;">You'll keep access until the end of your billing period. Help us improve — why are you leaving?</p>
+    <div id="cancel-reasons" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+      <label class="cancel-reason"><input type="radio" name="cancel_reason" value="too_expensive"> Too expensive</label>
+      <label class="cancel-reason"><input type="radio" name="cancel_reason" value="not_using"> Not using it enough</label>
+      <label class="cancel-reason"><input type="radio" name="cancel_reason" value="missing_features"> Missing features I need</label>
+      <label class="cancel-reason"><input type="radio" name="cancel_reason" value="found_alternative"> Found a better alternative</label>
+      <label class="cancel-reason"><input type="radio" name="cancel_reason" value="other"> Other</label>
+    </div>
+    <textarea id="cancel-comment" placeholder="Any additional feedback? (optional)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #E5E5E7;font-family:inherit;font-size:0.88rem;resize:none;height:72px;margin-bottom:16px;background:var(--bg2,#fff);color:var(--text,#000);outline:none;"></textarea>
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeCancelModal()" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E5E7;background:transparent;font-family:inherit;font-size:0.9rem;font-weight:600;cursor:pointer;color:var(--text,#000);">Keep my plan</button>
+      <button id="confirm-cancel-btn" onclick="confirmCancel()" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ef4444;background:transparent;font-family:inherit;font-size:0.9rem;font-weight:600;cursor:pointer;color:#ef4444;">Cancel subscription</button>
     </div>
   </div>
 </div>
@@ -2265,34 +2301,50 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   }
 
   // ===== CANCEL SUBSCRIPTION =====
-  async function handleCancelSubscription() {
+  function handleCancelSubscription() {
     if (!currentUser) return;
-    if (!confirm('Cancel your subscription? You will keep access until the end of the billing period.')) return;
-    const btn = document.getElementById('profile-cancel-btn');
+    document.querySelectorAll('input[name="cancel_reason"]').forEach(r => r.checked = false);
+    document.getElementById('cancel-comment').value = '';
+    document.getElementById('confirm-cancel-btn').disabled = false;
+    document.getElementById('confirm-cancel-btn').textContent = 'Cancel subscription';
+    closeProfileModal();
+    document.getElementById('cancel-modal').classList.add('active');
+  }
+
+  function closeCancelModal() {
+    document.getElementById('cancel-modal').classList.remove('active');
+  }
+
+  async function confirmCancel() {
+    if (!currentUser) return;
+    const reason = document.querySelector('input[name="cancel_reason"]:checked')?.value || 'not_specified';
+    const comment = document.getElementById('cancel-comment').value.trim();
+    const btn = document.getElementById('confirm-cancel-btn');
     btn.disabled = true;
     btn.textContent = 'Cancelling...';
     try {
       const res = await fetch('/api/cancel-subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: currentUser.uid }),
+        body: JSON.stringify({ userId: currentUser.uid, reason, comment }),
       });
       const data = await res.json();
       if (data.ok) {
-        btn.textContent = 'Cancelled — active until period end';
-        btn.style.color = '#6F6F77';
-        btn.style.borderColor = '#6F6F77';
+        closeCancelModal();
+        const profileCancelBtn = document.getElementById('profile-cancel-btn');
+        profileCancelBtn.textContent = 'Cancelled — active until period end';
+        profileCancelBtn.style.color = '#6F6F77';
+        profileCancelBtn.style.borderColor = '#6F6F77';
+        profileCancelBtn.disabled = true;
       } else {
         alert('Error: ' + (data.error || 'Unknown error'));
         btn.disabled = false;
-        btn.innerHTML = '<i data-lucide="x-circle"></i> Cancel Subscription';
-        lucide.createIcons();
+        btn.textContent = 'Cancel subscription';
       }
     } catch (e) {
       alert('Network error');
       btn.disabled = false;
-      btn.innerHTML = '<i data-lucide="x-circle"></i> Cancel Subscription';
-      lucide.createIcons();
+      btn.textContent = 'Cancel subscription';
     }
   }
 
@@ -2493,9 +2545,10 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   });
 
   document.getElementById('profile-modal').addEventListener('click', (e) => {
-    if (e.target.id === 'profile-modal') {
-      closeProfileModal();
-    }
+    if (e.target.id === 'profile-modal') closeProfileModal();
+  });
+  document.getElementById('cancel-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'cancel-modal') closeCancelModal();
   });
 
   document.getElementById('forgot-password-modal').addEventListener('click', (e) => {
