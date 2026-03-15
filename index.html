@@ -1114,7 +1114,7 @@
         <p id="profile-expiry" style="font-size: 1rem; color: #000000; margin-top: 4px;"></p>
       </div>
 
-      <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); document.getElementById('pro-section').scrollIntoView({behavior:'smooth'})">Upgrade Plan</button>
+      <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); startCheckout('pro')">Upgrade Plan</button>
 
       <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()"><i data-lucide="link-2"></i> Copy referral link</button>
       <button id="profile-cancel-btn" class="btn-logout" style="display:none;border-color:#ef4444;color:#ef4444;" onclick="handleCancelSubscription()"><i data-lucide="x-circle"></i> Cancel Subscription</button>
@@ -2427,7 +2427,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       } else if (plan === 'pro') {
         document.getElementById('profile-expiry-section').style.display = 'block';
         document.getElementById('profile-expiry').textContent = 'Coming soon...';
-        if (upgradeBtn) { upgradeBtn.style.display = 'block'; upgradeBtn.textContent = 'Upgrade to MAXIMUM'; upgradeBtn.onclick = () => { closeProfileModal(); document.getElementById('maximum-section').scrollIntoView({behavior:'smooth'}); }; }
+        if (upgradeBtn) { upgradeBtn.style.display = 'block'; upgradeBtn.textContent = 'Upgrade to MAXIMUM'; upgradeBtn.onclick = () => { closeProfileModal(); startCheckout('maximum'); }; }
         if (cancelBtn) cancelBtn.style.display = 'block';
       } else {
         document.getElementById('profile-expiry-section').style.display = 'block';
