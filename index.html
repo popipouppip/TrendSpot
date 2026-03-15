@@ -286,6 +286,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      width: 100%;
       transition: all 0.3s ease;
     }
 
@@ -986,7 +987,9 @@
     /* Decorative section separator line */
     .pricing-section { border-top: 1px solid var(--border); }
     .pricing-section + .pricing-section { border-top: 1px solid var(--border); }
+    .lucide { display: inline-block; vertical-align: middle; margin-right: 6px; width: 18px; height: 18px; stroke-width: 2; }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -1047,7 +1050,7 @@
     <div class="modal-divider">or</div>
 
     <button type="button" class="btn-google" onclick="handleGoogleSignIn()">
-      <img src="649f0e7877cce0e27d523ad76b2a2e90.jpg" alt="Google" style="width: 20px; height: 20px; margin-right: 8px;">
+      <i data-lucide="globe" style="width:20px;height:20px;stroke-width:2;flex-shrink:0;"></i>
       Continue with Google
     </button>
 
@@ -1113,7 +1116,8 @@
 
       <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); document.getElementById('pro-section').scrollIntoView({behavior:'smooth'})">Upgrade Plan</button>
 
-      <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()">🔗 Copy referral link</button>
+      <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()"><i data-lucide="link-2"></i> Copy referral link</button>
+      <button id="profile-cancel-btn" class="btn-logout" style="display:none;border-color:#ef4444;color:#ef4444;" onclick="handleCancelSubscription()"><i data-lucide="x-circle"></i> Cancel Subscription</button>
       <button class="btn-logout" onclick="handleSignOut()">Sign Out</button>
     </div>
   </div>
@@ -1256,7 +1260,7 @@
 <div style="max-width:860px;margin:0 auto 48px;padding:0 40px;">
   <div style="background:linear-gradient(135deg,rgba(124,124,250,0.12) 0%,rgba(124,124,250,0.04) 100%);border:1px solid rgba(124,124,250,0.35);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
     <div>
-      <div style="font-size:1.05rem;font-weight:700;color:var(--text,#EDEDF2);margin-bottom:6px;">🔗 Invite a friend — both get 50% off</div>
+      <div style="font-size:1.05rem;font-weight:700;color:var(--text,#EDEDF2);margin-bottom:6px;"><i data-lucide="link-2"></i> Invite a friend — both get 50% off</div>
       <div style="font-size:0.88rem;color:var(--text2,#8888A0);line-height:1.5;">Share your referral link. When a friend subscribes, they get 50% off their first month — and so do you, automatically.</div>
     </div>
     <button onclick="handleReferralBannerClick()" style="background:var(--accent,#7C7CFA);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:inherit;font-size:0.9rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;" id="banner-ref-btn">Copy my referral link</button>
@@ -1265,7 +1269,7 @@
 
 <!-- FREE SECTION -->
 <div class="pricing-section" id="free-section">
-  <div class="content-title">📌 FREE PLAN — 6 Cards Per Day</div>
+  <div class="content-title"><i data-lucide="pin"></i> FREE PLAN — 6 Cards Per Day</div>
 
   <div class="cards-grid">
     <div class="card">
@@ -1333,9 +1337,9 @@
 
 <!-- PRO SECTION -->
 <div class="pricing-section content-locked" id="pro-section">
-  <div class="content-title">⭐ PRO PLAN — 12+ Cards + Analytics</div>
+  <div class="content-title"><i data-lucide="star"></i> PRO PLAN — 12+ Cards + Analytics</div>
 
-  <div class="locked-message">🔒 Upgrade to PRO to see all cards and analytics</div>
+  <div class="locked-message"><i data-lucide="lock"></i> Upgrade to PRO to see all cards and analytics</div>
 
   <div class="cards-grid">
     <div class="card">
@@ -1457,9 +1461,9 @@
 
 <!-- MAXIMUM SECTION -->
 <div class="pricing-section content-locked" id="maximum-section">
-  <div class="content-title">🚀 MAXIMUM PLAN — 18+ Cards + Full Analysis + Roadmap</div>
+  <div class="content-title"><i data-lucide="rocket"></i> MAXIMUM PLAN — 18+ Cards + Full Analysis + Roadmap</div>
 
-  <div class="locked-message">🔒 Upgrade to MAXIMUM to unlock complete roadmaps and step-by-step guides</div>
+  <div class="locked-message"><i data-lucide="lock"></i> Upgrade to MAXIMUM to unlock complete roadmaps and step-by-step guides</div>
 
   <div class="cards-grid">
     <div class="card">
@@ -1593,7 +1597,7 @@
   </div>
 
   <div class="charts-block">
-    <div class="charts-title">📈 Trend Growth Performance</div>
+    <div class="charts-title"><i data-lucide="trending-up"></i> Trend Growth Performance</div>
     <div class="charts-grid">
       <div class="chart-item">
         <div class="chart-label">Trend 1: AI Tools</div>
@@ -1655,7 +1659,7 @@
   </div>
 
   <div class="roadmap-block">
-    <div class="roadmap-title">🎯 Step-by-Step Earning Roadmap <span style="font-size:0.75rem;font-weight:700;background:var(--accent,#7C7CFA);color:#fff;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:8px;">16 unique</span></div>
+    <div class="roadmap-title"><i data-lucide="target"></i> Step-by-Step Earning Roadmap <span style="font-size:0.75rem;font-weight:700;background:var(--accent,#7C7CFA);color:#fff;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:8px;">16 unique</span></div>
     <div class="roadmap-title" style="font-size:0.9rem;font-weight:400;color:#6F6F77;margin-top:-10px;">Choose one of 16 different roadmaps:</div>
     <div id="roadmap-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px;"></div>
     <div id="roadmap-content"></div>
@@ -2048,25 +2052,26 @@ function showRoadmap(n) {
     </div>`).join('');
   const toolsHtml = d.tools.map(t => `
     <div class="step">
-      <div class="step-number">📌</div>
+      <div class="step-number"><i data-lucide="pin"></i></div>
       <div class="step-content"><div class="step-title">${t.t}</div><div class="step-desc">${t.d}</div></div>
     </div>`).join('');
   const mistakesHtml = d.mistakes.map(m => `
     <div class="step">
-      <div class="step-number">❌</div>
+      <div class="step-number"><i data-lucide="x-circle"></i></div>
       <div class="step-content"><div class="step-title">${m.t}</div><div class="step-desc">${m.d}</div></div>
     </div>`).join('');
   document.getElementById('roadmap-content').innerHTML = `
     <div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#1A1A1A;">Idea #${n}: ${d.title}</div>
     <div class="roadmap-steps">${stepsHtml}</div>
     <div class="analytics-block" style="margin-top:24px">
-      <div class="analytics-title">📚 Tools & Resources</div>
+      <div class="analytics-title"><i data-lucide="book-open"></i> Tools & Resources</div>
       <div class="roadmap-steps">${toolsHtml}</div>
     </div>
     <div class="analytics-block" style="margin-top:16px">
-      <div class="analytics-title">⚠️ Common Mistakes</div>
+      <div class="analytics-title"><i data-lucide="alert-triangle"></i> Common Mistakes</div>
       <div class="roadmap-steps">${mistakesHtml}</div>
     </div>`;
+  lucide.createIcons();
 }
 
 function badgeClass(d) { return d === 'Easy' ? 'badge-easy' : d === 'Medium' ? 'badge-medium' : 'badge-hard'; }
@@ -2110,11 +2115,11 @@ async function loadCardsFromData() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoadmap(1); loadCardsFromData(); });
+document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoadmap(1); loadCardsFromData(); lucide.createIcons(); });
 </script>
 
 <footer>
-  <p>💡 TrendSpot — Daily ideas to make money. Run <code>python fetch_trends.py</code> daily to get fresh cards</p>
+  <p><i data-lucide="lightbulb"></i> TrendSpot — Daily ideas to make money. Run <code>python fetch_trends.py</code> daily to get fresh cards</p>
 </footer>
 
 <script>
@@ -2259,6 +2264,38 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       });
   }
 
+  // ===== CANCEL SUBSCRIPTION =====
+  async function handleCancelSubscription() {
+    if (!currentUser) return;
+    if (!confirm('Cancel your subscription? You will keep access until the end of the billing period.')) return;
+    const btn = document.getElementById('profile-cancel-btn');
+    btn.disabled = true;
+    btn.textContent = 'Cancelling...';
+    try {
+      const res = await fetch('/api/cancel-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: currentUser.uid }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        btn.textContent = 'Cancelled — active until period end';
+        btn.style.color = '#6F6F77';
+        btn.style.borderColor = '#6F6F77';
+      } else {
+        alert('Error: ' + (data.error || 'Unknown error'));
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="x-circle"></i> Cancel Subscription';
+        lucide.createIcons();
+      }
+    } catch (e) {
+      alert('Network error');
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="x-circle"></i> Cancel Subscription';
+      lucide.createIcons();
+    }
+  }
+
   // ===== SIGN OUT =====
   function handleSignOut() {
     window.signOut(window.auth).then(() => {
@@ -2382,17 +2419,21 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       document.getElementById('profile-plan').textContent = plan.toUpperCase();
 
       const upgradeBtn = document.getElementById('profile-upgrade-btn');
+      const cancelBtn = document.getElementById('profile-cancel-btn');
       if (plan === 'free') {
         document.getElementById('profile-expiry-section').style.display = 'none';
         if (upgradeBtn) upgradeBtn.style.display = 'block';
+        if (cancelBtn) cancelBtn.style.display = 'none';
       } else if (plan === 'pro') {
         document.getElementById('profile-expiry-section').style.display = 'block';
         document.getElementById('profile-expiry').textContent = 'Coming soon...';
         if (upgradeBtn) { upgradeBtn.style.display = 'block'; upgradeBtn.textContent = 'Upgrade to MAXIMUM'; upgradeBtn.onclick = () => { closeProfileModal(); document.getElementById('maximum-section').scrollIntoView({behavior:'smooth'}); }; }
+        if (cancelBtn) cancelBtn.style.display = 'block';
       } else {
         document.getElementById('profile-expiry-section').style.display = 'block';
         document.getElementById('profile-expiry').textContent = 'Coming soon...';
         if (upgradeBtn) upgradeBtn.style.display = 'none';
+        if (cancelBtn) cancelBtn.style.display = 'block';
       }
 
       updateContentVisibility(plan);
@@ -2471,7 +2512,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       localStorage.setItem('ref', ref);
       history.replaceState({}, '', window.location.pathname);
       const banner = document.createElement('div');
-      banner.textContent = '🎉 You got 50% off your first month via referral!';
+      banner.textContent = 'You got 50% off your first month via referral!';
       banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#7C7CFA;color:#fff;padding:12px 24px;border-radius:12px;font-size:0.9rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.4);';
       document.body.appendChild(banner);
       setTimeout(() => banner.remove(), 5000);
@@ -2494,7 +2535,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
     navigator.clipboard.writeText(link).then(() => {
       const btn = document.getElementById('profile-ref-btn');
       btn.textContent = '✓ Copied!';
-      setTimeout(() => { btn.textContent = '🔗 Copy referral link'; }, 2000);
+      setTimeout(() => { btn.innerHTML = '<i data-lucide="link-2"></i> Copy referral link'; lucide.createIcons(); }, 2000);
     });
   }
 
@@ -2502,7 +2543,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   const params = new URLSearchParams(window.location.search);
   if (params.get('payment') === 'success') {
     const toast = document.createElement('div');
-    toast.textContent = '🎉 Payment successful! Your plan has been upgraded.';
+    toast.textContent = 'Payment successful! Your plan has been upgraded.';
     toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#18181B;color:#fff;padding:14px 24px;border-radius:12px;font-size:0.95rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.3);';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 5000);

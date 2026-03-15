@@ -49,6 +49,20 @@ module.exports = async (req, res) => {
     }
   }
 
+  if (event.type === 'customer.subscription.deleted') {
+    const sub = event.data.object;
+    const customerId = sub.customer;
+    try {
+      const userId = await findUserIdByCustomer(customerId);
+      if (userId) {
+        await updateFirestoreUser(userId, { plan: 'free' });
+        console.log('Subscription cancelled, plan reset to free:', userId);
+      }
+    } catch (e) {
+      console.error('Cancel webhook error:', e.message);
+    }
+  }
+
   res.json({ received: true });
 };
 
@@ -87,6 +101,26 @@ async function getFirestoreUser(userId) {
   if (!response.ok) return null;
   const data = await response.json();
   return data.fields || null;
+}
+
+async function findUserIdByCustomer(customerId) {
+  const { projectId, token } = await getFirestoreToken();
+  const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      structuredQuery: {
+        from: [{ collectionId: 'users' }],
+        where: { fieldFilter: { field: { fieldPath: 'stripeCustomerId' }, op: 'EQUAL', value: { stringValue: customerId } } },
+        limit: 1,
+      },
+    }),
+  });
+  const results = await response.json();
+  const doc = results[0]?.document;
+  if (!doc) return null;
+  return doc.name.split('/').pop();
 }
 
 async function applyReferrerDiscount(stripe, referrerUid) {
