@@ -11,7 +11,7 @@
   <!-- Firebase SDK v9+ (modular) -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
     import { getFirestore, collection, doc, getDoc, setDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
     const firebaseConfig = {
@@ -36,6 +36,7 @@
     window.signInWithPopup = signInWithPopup;
     window.signOut = signOut;
     window.onAuthStateChanged = onAuthStateChanged;
+    window.sendPasswordResetEmail = sendPasswordResetEmail;
     window.getDoc = getDoc;
     window.setDoc = setDoc;
     window.updateDoc = updateDoc;
@@ -2130,6 +2131,7 @@ function buildCard(card, index) {
 
 async function loadCardsFromData() {
   const today = new Date();
+  let loaded = false;
   for (let i = 0; i < 7; i++) {
     const d = new Date(today); d.setDate(today.getDate() - i);
     const dateStr = d.toISOString().split('T')[0];
@@ -2145,9 +2147,13 @@ async function loadCardsFromData() {
       if (proGrid && cards.length > 6) proGrid.innerHTML = cards.slice(6,12).map((c,i) => buildCard(c, i+7)).join('');
       const maxGrid = document.querySelector('#maximum-section .cards-grid');
       if (maxGrid && cards.length > 12) maxGrid.innerHTML = cards.slice(12,18).map((c,i) => buildCard(c, i+13)).join('');
-      console.log(`Loaded cards from ${dateStr}.json`);
+      loaded = true;
       break;
     } catch(e) { continue; }
+  }
+  if (!loaded) {
+    const freeGrid = document.querySelector('#free-section .cards-grid');
+    if (freeGrid) freeGrid.innerHTML = '<p style="color:#6F6F77;padding:20px;grid-column:1/-1;">Fresh trends coming soon. Check back tomorrow!</p>';
   }
 }
 
@@ -2165,9 +2171,8 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   // ===== STRIPE CHECKOUT =====
   async function startCheckout(plan) {
     if (!currentUser) { openAuthModal(); return; }
-    const btn = event.target;
-    btn.textContent = 'Loading...';
-    btn.disabled = true;
+    const btn = event?.target || null;
+    if (btn) { btn.textContent = 'Loading...'; btn.disabled = true; }
     try {
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
@@ -2180,8 +2185,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
     } catch(e) {
       alert('Network error. Try again.');
     }
-    btn.textContent = plan === 'pro' ? 'Get PRO' : 'Get MAXIMUM';
-    btn.disabled = false;
+    if (btn) { btn.textContent = plan === 'pro' ? 'Get PRO' : 'Get MAXIMUM'; btn.disabled = false; }
   }
 
   // Wait for Firebase to be initialized
@@ -2377,7 +2381,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
 
         if (data.plan_expiry) {
           const expiry = data.plan_expiry.toDate ? data.plan_expiry.toDate() : new Date(data.plan_expiry);
-          if (expiry < new Date()) {
+          if (!isNaN(expiry) && expiry < new Date()) {
             await window.updateDoc(userRef, { plan: 'free' });
             return { plan: 'free', planExpiry: null, cancelled: false };
           }
@@ -2554,11 +2558,6 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
         errorEl.style.display = 'block';
       });
   }
-
-  // Add sendPasswordResetEmail to global scope
-  import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js').then(module => {
-    window.sendPasswordResetEmail = module.sendPasswordResetEmail;
-  });
 
   // ===== CLOSE MODALS ON OUTSIDE CLICK =====
   document.getElementById('auth-modal').addEventListener('click', (e) => {
