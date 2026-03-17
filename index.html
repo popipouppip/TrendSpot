@@ -2180,7 +2180,8 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
         body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email, referrerUid: localStorage.getItem('ref') !== currentUser.uid ? localStorage.getItem('ref') || undefined : undefined })
       });
       const data = await res.json();
-      if (data.url) { localStorage.removeItem('ref'); window.location.href = data.url; }
+      if (!res.ok) { alert('Error: ' + (data.error || 'Server error')); }
+      else if (data.url) { localStorage.removeItem('ref'); window.location.href = data.url; }
       else { alert('Error: ' + (data.error || 'Unknown error')); }
     } catch(e) {
       alert('Network error. Try again.');
@@ -2333,9 +2334,11 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
         body: JSON.stringify({ userId: currentUser.uid, reason, comment }),
       });
       const data = await res.json();
+      if (!res.ok) { alert('Error: ' + (data.error || 'Server error')); btn.disabled = false; btn.textContent = 'Cancel subscription'; return; }
       if (data.ok) {
         closeCancelModal();
         const profileCancelBtn = document.getElementById('profile-cancel-btn');
+        if (!profileCancelBtn) return;
         const expiryDate = data.expiryDate ? new Date(data.expiryDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
         profileCancelBtn.textContent = expiryDate ? `Active until ${expiryDate}` : 'Cancelled — active until period end';
         profileCancelBtn.style.color = '#6F6F77';
@@ -2469,7 +2472,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
     if (currentUser) {
       const { plan, planExpiry, cancelled } = await getUserPlan(currentUser.uid);
       const email = currentUser.email || 'User';
-      const avatar = email[0].toUpperCase();
+      const avatar = email.length > 0 ? email[0].toUpperCase() : '?';
 
       document.getElementById('user-email').textContent = email;
       document.getElementById('user-avatar').textContent = avatar;

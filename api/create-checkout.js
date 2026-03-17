@@ -8,7 +8,7 @@ const PRICES = {
 async function ensureReferralCoupon(stripe) {
   try {
     await stripe.coupons.retrieve('REFER50');
-  } catch {
+  } catch (e) {
     await stripe.coupons.create({
       id: 'REFER50',
       name: 'Referral discount — 50% off first month',
