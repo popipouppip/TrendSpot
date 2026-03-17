@@ -147,7 +147,13 @@ async function applyReferrerDiscount(stripe, referrerUid) {
     return;
   }
 
-  await stripe.subscriptions.update(subscriptions.data[0].id, {
+  const sub = subscriptions.data[0];
+  if (sub.discounts && sub.discounts.length > 0) {
+    console.log('Referrer already has a discount, skipping');
+    return;
+  }
+
+  await stripe.subscriptions.update(sub.id, {
     discounts: [{ coupon: 'REFER50' }],
   });
 }

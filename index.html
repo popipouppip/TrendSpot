@@ -2177,10 +2177,10 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email, referrerUid: localStorage.getItem('ref') || undefined })
+        body: JSON.stringify({ plan, userId: currentUser.uid, email: currentUser.email, referrerUid: localStorage.getItem('ref') !== currentUser.uid ? localStorage.getItem('ref') || undefined : undefined })
       });
       const data = await res.json();
-      if (data.url) { window.location.href = data.url; }
+      if (data.url) { localStorage.removeItem('ref'); window.location.href = data.url; }
       else { alert('Error: ' + (data.error || 'Unknown error')); }
     } catch(e) {
       alert('Network error. Try again.');
