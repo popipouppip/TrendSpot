@@ -896,7 +896,7 @@
       --border-bright: #38384A;
       --text: #EDEDF2;
       --text2: #8888A0;
-      --accent: #7C7CFA;
+      --accent: #2563EB;
     }
 
     body { background: var(--bg); color: var(--text); }
@@ -919,7 +919,7 @@
     .modal-tab.active { color: var(--text); border-bottom-color: var(--accent); }
     .modal-close { color: var(--text2); }
     .form-group input { background: var(--bg3); border-color: var(--border); color: var(--text); }
-    .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,124,250,0.15); }
+    .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
     .form-group input::placeholder { color: var(--text2); }
     .btn-primary { background: var(--text); color: var(--bg); }
     .btn-primary:hover { background: #d0d0e0; }
@@ -927,24 +927,24 @@
     .btn-google:hover { background: var(--border); }
     .modal-divider { color: var(--text2); }
 
-    .top-banner { background: linear-gradient(180deg, #0d0d1e 0%, var(--bg) 100%); border-bottom: 1px solid var(--accent); padding: 50px 40px; }
+    .top-banner { background: var(--bg); border-bottom: 1px solid var(--border); padding: 50px 40px; }
     .banner-title { color: var(--text); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; }
     .banner-subtitle { color: var(--text2); font-size: 1rem; }
 
-    .hero h1 { background: linear-gradient(135deg, #fff 0%, #7C7CFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero h1 { color: var(--text); }
     .hero p { color: var(--text2); }
 
     .section-title { color: var(--text); }
 
     /* FREE — нейтральный */
     .plan-card { background: var(--bg2); border: 2px solid var(--border-bright); box-shadow: none; }
-    .plan-card:hover { border-color: #555568; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .plan-card:hover { border-color: #555568; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     /* PRO — серебряный */
-    .plan-card.pro-card { background: #16161e; border: 2px solid #9090A8; box-shadow: 0 0 18px rgba(180,180,200,0.1); }
-    .plan-card.pro-card:hover { border-color: #C0C0D4; box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 28px rgba(180,180,200,0.18); }
+    .plan-card.pro-card { background: #16161e; border: 2px solid #9090A8; }
+    .plan-card.pro-card:hover { border-color: #C0C0D4; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     /* MAXIMUM — золотой, главный */
-    .plan-card.max-card { background: #1a1200; border: 2px solid #D4A017; box-shadow: 0 0 28px rgba(212,160,23,0.3), 0 0 0 1px #D4A017; }
-    .plan-card.max-card:hover { border-color: #F0C030; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,160,23,0.4); }
+    .plan-card.max-card { background: #1a1200; border: 2px solid #D4A017; }
+    .plan-card.max-card:hover { border-color: #F0C030; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     .plan-header { border-bottom-color: var(--border); }
     .plan-name { color: var(--text); }
     .plan-card.pro-card .feature-check { color: #C0C0D4; }
@@ -1132,7 +1132,7 @@
 
       <button id="profile-upgrade-btn" class="btn-primary" onclick="closeProfileModal(); startCheckout('pro')">Upgrade Plan</button>
 
-      <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#7C7CFA);color:var(--accent,#7C7CFA)" onclick="copyReferralLink()"><i data-lucide="link-2"></i> Copy referral link</button>
+      <button id="profile-ref-btn" class="btn-logout" style="border-color:var(--accent,#2563EB);color:var(--accent,#2563EB)" onclick="copyReferralLink()"><i data-lucide="link-2"></i> Copy referral link</button>
       <button id="profile-cancel-btn" class="btn-logout" style="display:none;border-color:#ef4444;color:#ef4444;" onclick="handleCancelSubscription()"><i data-lucide="x-circle"></i> Cancel Subscription</button>
       <button class="btn-logout" onclick="handleSignOut()">Sign Out</button>
     </div>
@@ -1295,12 +1295,12 @@
 
 <!-- REFERRAL BANNER -->
 <div style="max-width:860px;margin:0 auto 48px;padding:0 40px;">
-  <div style="background:linear-gradient(135deg,rgba(124,124,250,0.12) 0%,rgba(124,124,250,0.04) 100%);border:1px solid rgba(124,124,250,0.35);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+  <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
     <div>
       <div style="font-size:1.05rem;font-weight:700;color:var(--text,#EDEDF2);margin-bottom:6px;"><i data-lucide="link-2"></i> Invite a friend — both get 50% off</div>
       <div style="font-size:0.88rem;color:var(--text2,#8888A0);line-height:1.5;">Share your referral link. When a friend subscribes, they get 50% off their first month — and so do you, automatically.</div>
     </div>
-    <button onclick="handleReferralBannerClick()" style="background:var(--accent,#7C7CFA);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:inherit;font-size:0.9rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;" id="banner-ref-btn">Copy my referral link</button>
+    <button onclick="handleReferralBannerClick()" style="background:var(--accent,#2563EB);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:inherit;font-size:0.9rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;" id="banner-ref-btn">Copy my referral link</button>
   </div>
 </div>
 
@@ -1696,7 +1696,7 @@
   </div>
 
   <div class="roadmap-block">
-    <div class="roadmap-title"><i data-lucide="target"></i> Step-by-Step Earning Roadmap <span style="font-size:0.75rem;font-weight:700;background:var(--accent,#7C7CFA);color:#fff;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:8px;">16 unique</span></div>
+    <div class="roadmap-title"><i data-lucide="target"></i> Step-by-Step Earning Roadmap <span style="font-size:0.75rem;font-weight:700;background:var(--accent,#2563EB);color:#fff;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:8px;">16 unique</span></div>
     <div class="roadmap-title" style="font-size:0.9rem;font-weight:400;color:#6F6F77;margin-top:-10px;">Choose one of 16 different roadmaps:</div>
     <div id="roadmap-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px;"></div>
     <div id="roadmap-content"></div>
@@ -2588,7 +2588,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       history.replaceState({}, '', window.location.pathname);
       const banner = document.createElement('div');
       banner.textContent = 'You got 50% off your first month via referral!';
-      banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#7C7CFA;color:#fff;padding:12px 24px;border-radius:12px;font-size:0.9rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.4);';
+      banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#2563EB;color:#fff;padding:12px 24px;border-radius:12px;font-size:0.9rem;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.4);';
       document.body.appendChild(banner);
       setTimeout(() => banner.remove(), 5000);
     }
