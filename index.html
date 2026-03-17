@@ -2332,10 +2332,12 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       if (data.ok) {
         closeCancelModal();
         const profileCancelBtn = document.getElementById('profile-cancel-btn');
-        profileCancelBtn.textContent = 'Cancelled — active until period end';
+        const expiryDate = data.expiryDate ? new Date(data.expiryDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+        profileCancelBtn.textContent = expiryDate ? `Active until ${expiryDate}` : 'Cancelled — active until period end';
         profileCancelBtn.style.color = '#6F6F77';
         profileCancelBtn.style.borderColor = '#6F6F77';
         profileCancelBtn.disabled = true;
+        if (expiryDate) document.getElementById('profile-expiry').textContent = `Active until ${expiryDate}`;
       } else {
         alert('Error: ' + (data.error || 'Unknown error'));
         btn.disabled = false;
@@ -2373,21 +2375,24 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
       if (userDoc.exists()) {
         const data = userDoc.data();
 
-        // Check if subscription expired
         if (data.plan_expiry) {
           const expiry = data.plan_expiry.toDate ? data.plan_expiry.toDate() : new Date(data.plan_expiry);
           if (expiry < new Date()) {
             await window.updateDoc(userRef, { plan: 'free' });
-            return 'free';
+            return { plan: 'free', planExpiry: null, cancelled: false };
           }
         }
 
-        return data.plan || 'free';
+        return {
+          plan: data.plan || 'free',
+          planExpiry: data.plan_expiry || null,
+          cancelled: !!data.cancel_reason,
+        };
       }
-      return 'free';
+      return { plan: 'free', planExpiry: null, cancelled: false };
     } catch (error) {
       console.error('Error getting user plan:', error);
-      return 'free';
+      return { plan: 'free', planExpiry: null, cancelled: false };
     }
   }
 
@@ -2458,7 +2463,7 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
   // ===== UPDATE PROFILE DISPLAY =====
   async function updateProfileDisplay() {
     if (currentUser) {
-      const plan = await getUserPlan(currentUser.uid);
+      const { plan, planExpiry, cancelled } = await getUserPlan(currentUser.uid);
       const email = currentUser.email || 'User';
       const avatar = email[0].toUpperCase();
 
@@ -2472,20 +2477,38 @@ document.addEventListener('DOMContentLoaded', () => { renderSelector(); showRoad
 
       const upgradeBtn = document.getElementById('profile-upgrade-btn');
       const cancelBtn = document.getElementById('profile-cancel-btn');
+
+      const expiryEl = document.getElementById('profile-expiry');
+      const expirySection = document.getElementById('profile-expiry-section');
+
+      function formatExpiry(raw) {
+        if (!raw) return null;
+        const d = raw.toDate ? raw.toDate() : new Date(raw);
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
       if (plan === 'free') {
-        document.getElementById('profile-expiry-section').style.display = 'none';
+        expirySection.style.display = 'none';
         if (upgradeBtn) upgradeBtn.style.display = 'block';
         if (cancelBtn) cancelBtn.style.display = 'none';
       } else if (plan === 'pro') {
-        document.getElementById('profile-expiry-section').style.display = 'block';
-        document.getElementById('profile-expiry').textContent = 'Coming soon...';
+        expirySection.style.display = 'block';
+        const date = formatExpiry(planExpiry);
+        expiryEl.textContent = cancelled && date ? `Active until ${date}` : (date || 'Active');
         if (upgradeBtn) { upgradeBtn.style.display = 'block'; upgradeBtn.textContent = 'Upgrade to MAXIMUM'; upgradeBtn.onclick = () => { closeProfileModal(); startCheckout('maximum'); }; }
-        if (cancelBtn) cancelBtn.style.display = 'block';
+        if (cancelBtn) {
+          if (cancelled) { cancelBtn.textContent = 'Cancelled — active until period end'; cancelBtn.style.color = '#6F6F77'; cancelBtn.style.borderColor = '#6F6F77'; cancelBtn.disabled = true; }
+          else { cancelBtn.style.display = 'block'; }
+        }
       } else {
-        document.getElementById('profile-expiry-section').style.display = 'block';
-        document.getElementById('profile-expiry').textContent = 'Coming soon...';
+        expirySection.style.display = 'block';
+        const date = formatExpiry(planExpiry);
+        expiryEl.textContent = cancelled && date ? `Active until ${date}` : (date || 'Active');
         if (upgradeBtn) upgradeBtn.style.display = 'none';
-        if (cancelBtn) cancelBtn.style.display = 'block';
+        if (cancelBtn) {
+          if (cancelled) { cancelBtn.textContent = 'Cancelled — active until period end'; cancelBtn.style.color = '#6F6F77'; cancelBtn.style.borderColor = '#6F6F77'; cancelBtn.disabled = true; }
+          else { cancelBtn.style.display = 'block'; }
+        }
       }
 
       updateContentVisibility(plan);

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendSpot — Маркетинг план</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e5e5e5; }
+
+    .header { padding: 28px 36px 18px; border-bottom: 1px solid #222; }
+    .header h1 { font-size: 22px; color: #fff; }
+    .header p { color: #555; margin-top: 4px; font-size: 13px; }
+
+    .layout { display: flex; min-height: calc(100vh - 70px); }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      border-right: 1px solid #1e1e1e;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+
+    .sidebar-group { padding: 6px 16px; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #444; margin-top: 10px; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .nav-item:hover { color: #ccc; background: #161616; }
+    .nav-item.active { color: #fff; background: #161616; border-left-color: #ff6b6b; }
+
+    .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .nav-badge { margin-left: auto; font-size: 10px; padding: 2px 6px; border-radius: 10px; background: #1a1a1a; color: #555; }
+    .nav-item.active .nav-badge { background: #2a1a1a; color: #ff6b6b; }
+
+    /* CONTENT */
+    .content { flex: 1; padding: 36px 44px; max-width: 820px; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-header { margin-bottom: 24px; }
+    .section-title { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+
+    .meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-time { background: #1a1a2e; color: #818cf8; }
+    .badge-result { background: #0f2d1a; color: #4ade80; }
+    .badge-p1 { background: #2d1a1a; color: #ff6b6b; }
+    .badge-p2 { background: #2d2010; color: #f59e0b; }
+    .badge-p3 { background: #1a2a1a; color: #86efac; }
+
+    .desc { color: #888; font-size: 14px; max-width: 640px; line-height: 1.7; }
+
+    .block-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #555; margin: 24px 0 10px; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 8px; }
+
+    .step {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px; background: #161616; border: 1px solid #222;
+      border-radius: 7px; cursor: pointer; transition: border-color 0.15s;
+    }
+    .step:hover { border-color: #333; }
+    .step.done { opacity: 0.4; }
+    .step.done .step-text { text-decoration: line-through; }
+
+    .step-check {
+      width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #444;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0; margin-top: 2px; transition: all 0.15s;
+    }
+    .step.done .step-check { background: #4ade80; border-color: #4ade80; color: #000; }
+    .step.done .step-check::before { content: '✓'; }
+
+    .step-text { font-size: 13px; color: #bbb; line-height: 1.5; }
+
+    /* BOX */
+    .box { background: #161616; border: 1px solid #222; border-radius: 8px; padding: 18px; margin-top: 16px; }
+    .box-title { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+
+    pre {
+      background: #111; border: 1px solid #222; border-radius: 6px;
+      padding: 14px; font-size: 13px; color: #9ab89a; white-space: pre-wrap;
+      font-family: 'Courier New', monospace; line-height: 1.7;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 5px 12px; background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 5px; font-size: 12px; color: #999; }
+
+    .tip { padding: 12px 16px; background: #1a1500; border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 13px; color: #c8a84b; margin-top: 20px; }
+    .info { padding: 12px 16px; background: #0f1a2e; border-left: 3px solid #818cf8; border-radius: 4px; font-size: 13px; color: #a0b4e8; margin-top: 12px; }
+    .lucide { display: inline-block; vertical-align: middle; margin-right: 5px; width: 16px; height: 16px; stroke-width: 2; }
+  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<div class="header">
+  <h1><i data-lucide="target"></i> TrendSpot — Маркетинг</h1>
+  <p>Личный план. Клик на шаг = отмечаешь выполненным. Сохраняется в браузере.</p>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-group">Со скриншотов</div>
+    <div class="nav-item active" onclick="show(0)"><span class="nav-icon"><i data-lucide="rocket"></i></span> Product Hunt <span class="nav-badge">P1</span></div>
+    <div class="nav-item" onclick="show(1)"><span class="nav-icon"><i data-lucide="megaphone"></i></span> Build in Public <span class="nav-badge">P1</span></div>
+    <div class="nav-item" onclick="show(2)"><span class="nav-icon"><i data-lucide="bot"></i></span> AI Directories <span class="nav-badge">P2</span></div>
+    <div class="nav-item" onclick="show(3)"><span class="nav-icon"><i data-lucide="users"></i></span> Reddit <span class="nav-badge">P2</span></div>
+    <div class="nav-item" onclick="show(4)"><span class="nav-icon"><i data-lucide="mail"></i></span> Cold Outreach <span class="nav-badge">P2</span></div>
+    <div class="nav-item" onclick="show(5)"><span class="nav-icon"><i data-lucide="video"></i></span> TikTok / Shorts <span class="nav-badge">P3</span></div>
+    <div class="nav-item" onclick="show(6)"><span class="nav-icon"><i data-lucide="briefcase"></i></span> LinkedIn <span class="nav-badge">P3</span></div>
+    <div class="nav-item" onclick="show(7)"><span class="nav-icon"><i data-lucide="newspaper"></i></span> Hacker News <span class="nav-badge">P3</span></div>
+    <div class="nav-item" onclick="show(8)"><span class="nav-icon"><i data-lucide="search"></i></span> SEO + Блог <span class="nav-badge">P4</span></div>
+    <div class="nav-item" onclick="show(9)"><span class="nav-icon"><i data-lucide="gift"></i></span> Реферальная <span class="nav-badge">P4</span></div>
+
+    <div class="sidebar-group">Мои добавки</div>
+    <div class="nav-item" onclick="show(10)"><span class="nav-icon"><i data-lucide="pen-line"></i></span> Гостевые посты <span class="nav-badge">P3</span></div>
+    <div class="nav-item" onclick="show(11)"><span class="nav-icon"><i data-lucide="send"></i></span> Email рассылка <span class="nav-badge">P3</span></div>
+    <div class="nav-item" onclick="show(12)"><span class="nav-icon"><i data-lucide="handshake"></i></span> YC + Партнёры <span class="nav-badge">P4</span></div>
+  </div>
+
+  <div class="content">
+
+    <!-- 0. PRODUCT HUNT -->
+    <div class="section active" id="s0">
+      <div class="section-title">Product Hunt</div>
+      <div class="meta">
+        <span class="badge badge-p1">Приоритет 1</span>
+        <span class="badge badge-time">⏱ 3 часа</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>500–2000 юзеров за день</span>
+      </div>
+      <p class="desc">Лучший способ быстро получить первых пользователей. #1 продукт дня = тысячи уников без рекламы. Делать один раз, в понедельник утром.</p>
+
+      <div class="block-title">Подготовка (за 2–3 дня)</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s0_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на producthunt.com</div></div>
+        <div class="step" onclick="toggle(this,'s0_1')"><div class="step-check"></div><div class="step-text">Сделать 3 скрина сайта: главная, карточка идеи, PRO экран</div></div>
+        <div class="step" onclick="toggle(this,'s0_2')"><div class="step-check"></div><div class="step-text">Написать описание: что это, зачем, для кого (4–5 предложений)</div></div>
+        <div class="step" onclick="toggle(this,'s0_3')"><div class="step-check"></div><div class="step-text">Собрать список друзей в Telegram — попросить проголосовать в день старта</div></div>
+        <div class="step" onclick="toggle(this,'s0_4')"><div class="step-check"></div><div class="step-text">Назначить дату публикации — понедельник, 6:00 UTC</div></div>
+      </div>
+
+      <div class="block-title">День старта</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s0_5')"><div class="step-check"></div><div class="step-text">Опубликовать продукт ровно в 6:00 UTC</div></div>
+        <div class="step" onclick="toggle(this,'s0_6')"><div class="step-check"></div><div class="step-text">Написать твит: "Лаунчим TrendSpot на Product Hunt — Помогите апвотить!"</div></div>
+        <div class="step" onclick="toggle(this,'s0_7')"><div class="step-check"></div><div class="step-text">Разослать сообщение друзьям — проголосовать в первый час</div></div>
+        <div class="step" onclick="toggle(this,'s0_8')"><div class="step-check"></div><div class="step-text">Отвечать на все комменты каждый час (первые 8 часов — критичны)</div></div>
+        <div class="step" onclick="toggle(this,'s0_9')"><div class="step-check"></div><div class="step-text">Постить скрины с прогрессом в Twitter каждые 2 часа</div></div>
+      </div>
+
+      <div class="tip"><i data-lucide="alert-triangle"></i>Первые 8 часов решают рейтинг. Будь онлайн весь день старта.</div>
+    </div>
+
+    <!-- 1. BUILD IN PUBLIC -->
+    <div class="section" id="s1">
+      <div class="section-title">Build in Public</div>
+      <div class="meta">
+        <span class="badge badge-p1">Приоритет 1</span>
+        <span class="badge badge-time">⏱ 5 мин / день</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>50–200 юзеров / мес</span>
+      </div>
+      <p class="desc">Каждый день пиши 1 твит про TrendSpot. О цифрах, новых функциях, ошибках, победах. Ошибки читают лучше успехов. Строит аудиторию и первых фанатов.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s1_0')"><div class="step-check"></div><div class="step-text">Создать аккаунт Twitter/X (если нет)</div></div>
+        <div class="step" onclick="toggle(this,'s1_1')"><div class="step-check"></div><div class="step-text">Написать первый пост: что строишь, зачем, на каком этапе</div></div>
+        <div class="step" onclick="toggle(this,'s1_2')"><div class="step-check"></div><div class="step-text">Поставить напоминание в телефоне: каждый день в 10 утра — 1 твит</div></div>
+        <div class="step" onclick="toggle(this,'s1_3')"><div class="step-check"></div><div class="step-text">Каждую неделю делиться цифрами: трафик, подписки, выручка</div></div>
+        <div class="step" onclick="toggle(this,'s1_4')"><div class="step-check"></div><div class="step-text">Отвечать на каждый комментарий — это удваивает видимость</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Шаблоны твитов</div>
+        <pre>"Запустил TrendSpot — 18 способов заработать на AI.
+Вот что узнал за первую неделю: [факт]"
+
+"500 пользователей! Спасибо. Вот ТОП-1 вопрос от юзеров: [вопрос]"
+
+"Сегодня сломал [что-то]. Урок: [урок]. Честность = аудитория."
+
+"Добавил способ #15. Потенциал $300-1000/мес. Вот как он работает:"</pre>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Хэштеги (в каждый пост)</div>
+        <div class="tags">
+          <span class="tag">#BuildInPublic</span>
+          <span class="tag">#AI</span>
+          <span class="tag">#Startup</span>
+          <span class="tag">#IndieHacker</span>
+          <span class="tag">#MakersLog</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. AI DIRECTORIES -->
+    <div class="section" id="s2">
+      <div class="section-title">AI Directories</div>
+      <div class="meta">
+        <span class="badge badge-p2">Приоритет 2</span>
+        <span class="badge badge-time">⏱ 2 часа (раз и навсегда)</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>300–500 юзеров / мес пассивно</span>
+      </div>
+      <p class="desc">Сотни тысяч людей ищут AI-инструменты через каталоги. Один раз зарегистрировал — получаешь трафик вечно. Самое лёгкое действие с лучшим ROI.</p>
+
+      <div class="block-title">Список каталогов — заполнить форму на каждом</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s2_0')"><div class="step-check"></div><div class="step-text">Futurepedia.io — самый крупный, 300k+ пользователей</div></div>
+        <div class="step" onclick="toggle(this,'s2_1')"><div class="step-check"></div><div class="step-text">Toolify.ai — 4000+ инструментов, быстрая заявка</div></div>
+        <div class="step" onclick="toggle(this,'s2_2')"><div class="step-check"></div><div class="step-text">There's An AI For That — theresanaiforthat.com</div></div>
+        <div class="step" onclick="toggle(this,'s2_3')"><div class="step-check"></div><div class="step-text">AI Tools Club — aitoolsclub.com</div></div>
+        <div class="step" onclick="toggle(this,'s2_4')"><div class="step-check"></div><div class="step-text">AI Search — aisearch.io</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Что писать в описании (копируй)</div>
+        <pre>Name: TrendSpot
+Category: AI Tools / Make Money / Productivity
+Tagline: 18 ways to make money with AI
+
+Description:
+TrendSpot gives you 18 proven ways to earn money using AI tools.
+Each idea comes with potential earnings, difficulty level, and
+step-by-step guide. From $50 to $10,000/month. Start in 30 minutes.
+
+URL: trend-spot-8nim.vercel.app</pre>
+      </div>
+
+      <div class="tip"><i data-lucide="lightbulb"></i>Заполни все 5 за один сеанс — 2 часа работы, пассивный трафик навсегда.</div>
+    </div>
+
+    <!-- 3. REDDIT -->
+    <div class="section" id="s3">
+      <div class="section-title">Reddit</div>
+      <div class="meta">
+        <span class="badge badge-p2">Приоритет 2</span>
+        <span class="badge badge-time">⏱ 20 мин × 2 / нед</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>100–300 юзеров / нед</span>
+      </div>
+      <p class="desc">Реальные люди с реальными проблемами. Правило 90/10: 90% пользы, 10% упоминание продукта. Конверсия в 4 раза выше, чем с платной рекламы.</p>
+
+      <div class="block-title">Сабреддиты</div>
+      <div class="box">
+        <div class="tags">
+          <span class="tag">r/Entrepreneur</span>
+          <span class="tag">r/SideHustle</span>
+          <span class="tag">r/allindiebusiness</span>
+          <span class="tag">r/passive_income</span>
+          <span class="tag">r/AItools</span>
+          <span class="tag">r/startups</span>
+        </div>
+      </div>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s3_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на Reddit (если нет аккаунта)</div></div>
+        <div class="step" onclick="toggle(this,'s3_1')"><div class="step-check"></div><div class="step-text">Первая неделя — только комментируй чужие посты, набери 50+ кармы</div></div>
+        <div class="step" onclick="toggle(this,'s3_2')"><div class="step-check"></div><div class="step-text">Со 2-й недели: постить 2 раза в неделю, разные сабы, разные тексты</div></div>
+        <div class="step" onclick="toggle(this,'s3_3')"><div class="step-check"></div><div class="step-text">Никогда не вставляй ссылку в первый комментарий</div></div>
+        <div class="step" onclick="toggle(this,'s3_4')"><div class="step-check"></div><div class="step-text">Отвечать на все комменты в течение 2 часов после публикации</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Шаблон поста</div>
+        <pre>Заголовок:
+"Собрал 18 способов заработать на AI в 2025 — делюсь"
+
+Текст:
+Потратил месяц — собирал только рабочие идеи.
+
+Вот топ-3:
+• ChatGPT промпты → $50–200/мес
+• Midjourney аватарки → $100–500/мес
+• Контент на Medium → $200–1000/мес
+
+Полный список: [ссылка]
+
+Помогу разобраться в комментах</pre>
+      </div>
+    </div>
+
+    <!-- 4. COLD OUTREACH -->
+    <div class="section" id="s4">
+      <div class="section-title">Cold Outreach</div>
+      <div class="meta">
+        <span class="badge badge-p2">Приоритет 2</span>
+        <span class="badge badge-time">⏱ 30 мин / день</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>2–5 партнёров → 1000–5000 трафика</span>
+      </div>
+      <p class="desc">100 персональных писем = примерно 1 клиент. Мало, но для старта достаточно. Особенно работает для партнёрств с карьерными центрами, блогерами, HR.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s4_0')"><div class="step-check"></div><div class="step-text">Собрать список 30 блогеров: YouTube → "make money with AI", "AI tools 2025"</div></div>
+        <div class="step" onclick="toggle(this,'s4_1')"><div class="step-check"></div><div class="step-text">Найти email: смотри описание канала, сайт, соцсети</div></div>
+        <div class="step" onclick="toggle(this,'s4_2')"><div class="step-check"></div><div class="step-text">Отправлять по 10 писем в день (не больше — иначе спам)</div></div>
+        <div class="step" onclick="toggle(this,'s4_3')"><div class="step-check"></div><div class="step-text">Нет ответа 3 дня → 1 фолоу-ап (коротко, без давления)</div></div>
+        <div class="step" onclick="toggle(this,'s4_4')"><div class="step-check"></div><div class="step-text">Ответил → быстро отвечай, предложи конкретное партнёрство</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Шаблон письма</div>
+        <pre>Тема: Коллаборация — AI способы заработка для твоей аудитории
+
+Привет [Имя],
+
+Смотрел твоё видео про [тема]. Крутой контент.
+
+Я сделал TrendSpot — 18 способов заработать на AI ($50–10k/мес).
+Думаю, твоей аудитории зайдёт.
+
+trend-spot-8nim.vercel.app
+
+Могу дать промокод для зрителей или написать гостевой пост.
+
+[Твоё имя]</pre>
+      </div>
+
+      <div class="tip"><i data-lucide="alert-triangle"></i>Письмо до 100 слов. Персонализируй первую строку — иначе улетит в спам.</div>
+    </div>
+
+    <!-- 5. TIKTOK -->
+    <div class="section" id="s5">
+      <div class="section-title">TikTok / YouTube Shorts</div>
+      <div class="meta">
+        <span class="badge badge-p3">Приоритет 3</span>
+        <span class="badge badge-time">⏱ 30 мин × 3 / нед</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Непредсказуемо — может +5000 за ночь</span>
+      </div>
+      <p class="desc">TikTok не смотрит на кол-во подписчиков — смотрит на досматриваемость. Новый аккаунт с нулём может набрать миллион просмотров. 60% маркетологов называют его главным каналом роста 2025–2026.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s5_0')"><div class="step-check"></div><div class="step-text">Создать аккаунт TikTok + YouTube (для Shorts)</div></div>
+        <div class="step" onclick="toggle(this,'s5_1')"><div class="step-check"></div><div class="step-text">Снять первое видео (15–30 сек, телефон, без монтажа)</div></div>
+        <div class="step" onclick="toggle(this,'s5_2')"><div class="step-check"></div><div class="step-text">Выкладывать 3 раза в неделю минимум</div></div>
+        <div class="step" onclick="toggle(this,'s5_3')"><div class="step-check"></div><div class="step-text">1 видео → сразу TikTok + YouTube Shorts (2 платформы, 1 усилие)</div></div>
+        <div class="step" onclick="toggle(this,'s5_4')"><div class="step-check"></div><div class="step-text">В bio и описании — ссылка на TrendSpot</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Идеи видео</div>
+        <pre>1. "Способ #1 заработать на AI прямо сейчас" → показ сайта + цифры
+
+2. "Что никто не говорит про ChatGPT деньги" → 3 факта
+
+3. "Я собрал 18 способов... вот ТОП 3" → быстрый список
+
+4. "Можно ли реально жить на AI заработок?" → честный ответ
+
+5. "Главная ошибка новичков на AI" → стоп, не делай так</pre>
+      </div>
+
+      <div class="info"><i data-lucide="info"></i>Начинай с хука: "Вот что мало кто знает про AI..." → досматриваемость растёт.</div>
+      <div class="tip"><i data-lucide="lightbulb"></i>Если видос не заходит — не удаляй. Пробуй другой формат. 10 видео = понимание.</div>
+    </div>
+
+    <!-- 6. LINKEDIN -->
+    <div class="section" id="s6">
+      <div class="section-title">LinkedIn личный бренд</div>
+      <div class="meta">
+        <span class="badge badge-p3">Приоритет 3</span>
+        <span class="badge badge-time">⏱ 2–3 поста / нед</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Медленно, но качественная аудитория</span>
+      </div>
+      <p class="desc">Посты основателя получают в 5 раз больше охвата, чем корпоративная страница. Пиши о процессе — "Сегодня сделал это, столкнулся с вот этим...". Идеальная аудитория для TrendSpot: HR, рекрутеры, карьеристы.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s6_0')"><div class="step-check"></div><div class="step-text">Заполнить профиль LinkedIn: фото, заголовок, описание</div></div>
+        <div class="step" onclick="toggle(this,'s6_1')"><div class="step-check"></div><div class="step-text">Выбрать одну тему: карьера / ИИ / заработок — и держаться её</div></div>
+        <div class="step" onclick="toggle(this,'s6_2')"><div class="step-check"></div><div class="step-text">Писать 2–3 поста в неделю о процессе разработки TrendSpot</div></div>
+        <div class="step" onclick="toggle(this,'s6_3')"><div class="step-check"></div><div class="step-text">Комментировать посты из своей ниши — видимость растёт</div></div>
+        <div class="step" onclick="toggle(this,'s6_4')"><div class="step-check"></div><div class="step-text">Делиться цифрами и ошибками — это читают лучше успехов</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Форматы постов</div>
+        <pre>"Запустил TrendSpot. Вот 3 вещи, которые я узнал за неделю: ..."
+
+"Личный пост = 561% охвата vs бизнес-страница.
+Вот почему я пишу от себя, а не от бренда."
+
+"Собрал 18 способов заработать на AI. Самый неожиданный — ..."</pre>
+      </div>
+    </div>
+
+    <!-- 7. HACKER NEWS -->
+    <div class="section" id="s7">
+      <div class="section-title">Hacker News</div>
+      <div class="meta">
+        <span class="badge badge-p3">Приоритет 3</span>
+        <span class="badge badge-time">⏱ 1 пост (разовое)</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Если зайдёт — 1000+ юзеров за день</span>
+      </div>
+      <p class="desc">Аудитория — разработчики, инвесторы, основатели стартапов. Формат "Show HN: Я сделал..." запускает обсуждение и приводит качественный трафик. Непредсказуемо, но стоит попробовать.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s7_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на news.ycombinator.com</div></div>
+        <div class="step" onclick="toggle(this,'s7_1')"><div class="step-check"></div><div class="step-text">Написать пост: "Show HN: TrendSpot – 18 ways to make money with AI [одна строка]"</div></div>
+        <div class="step" onclick="toggle(this,'s7_2')"><div class="step-check"></div><div class="step-text">Публиковать в понедельник в 9 утра EST — начало недели даёт больше охвата</div></div>
+        <div class="step" onclick="toggle(this,'s7_3')"><div class="step-check"></div><div class="step-text">Отвечать на каждый ответ — это строит доверие</div></div>
+        <div class="step" onclick="toggle(this,'s7_4')"><div class="step-check"></div><div class="step-text">Провал на HN — тоже трафик. Читай комменты как исследование рынка</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Как писать</div>
+        <pre>• Технически и честно — без маркетингового языка
+• Добавь комментарий: кто ты, почему создал, попроси фидбек
+• Не рекламируй — расскажи историю создания
+• Хороший заголовок: "Show HN: I built a site with 18 AI money ideas"</pre>
+      </div>
+
+      <div class="tip"><i data-lucide="alert-triangle"></i>HN аудитория не любит рекламу. Будь честным основателем, не маркетологом.</div>
+    </div>
+
+    <!-- 8. SEO -->
+    <div class="section" id="s8">
+      <div class="section-title">SEO + Блог</div>
+      <div class="meta">
+        <span class="badge badge-p3">Приоритет 4</span>
+        <span class="badge badge-time">⏱ 3–6 месяцев до результата</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Самый дешёвый трафик долгосрочно</span>
+      </div>
+      <p class="desc">Органика — самый дешёвый трафик в долгосрочной перспективе. Одна статья, написанная сегодня, может приводить людей годами. Но результата ждать 3–6 месяцев.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s8_0')"><div class="step-check"></div><div class="step-text">Зарегистрировать сайт в Google Search Console — бесплатно</div></div>
+        <div class="step" onclick="toggle(this,'s8_1')"><div class="step-check"></div><div class="step-text">Найти ключевые слова: "free resume builder", "AI resume generator"</div></div>
+        <div class="step" onclick="toggle(this,'s8_2')"><div class="step-check"></div><div class="step-text">Писать 1 статью в неделю: "Как заработать на AI [профессия]"</div></div>
+        <div class="step" onclick="toggle(this,'s8_3')"><div class="step-check"></div><div class="step-text">Писать для людей, не для поисковика — Google сам разберётся</div></div>
+        <div class="step" onclick="toggle(this,'s8_4')"><div class="step-check"></div><div class="step-text">ChatGPT и Perplexity тоже ищут ответы — пиши структурированно</div></div>
+      </div>
+
+      <div class="info"><i data-lucide="info"></i>Это долгосрочная игра. Начни позже, когда первые каналы уже работают.</div>
+    </div>
+
+    <!-- 9. РЕФЕРАЛЬНАЯ -->
+    <div class="section" id="s9">
+      <div class="section-title">Реферальная программа</div>
+      <div class="meta">
+        <span class="badge badge-p3">Приоритет 4</span>
+        <span class="badge badge-time">⏱ Настроить 1 раз</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Вирусный эффект при 500+ юзерах</span>
+      </div>
+      <p class="desc">86% людей доверяют рекомендации друга больше любой рекламы. Двустороннее поощрение работает лучше одностороннего. Запускать после того, как есть "aha moment" у юзеров.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s9_0')"><div class="step-check"></div><div class="step-text">Придумать оффер: "Пригласи друга — вы оба получите 1 месяц бесплатно"</div></div>
+        <div class="step" onclick="toggle(this,'s9_1')"><div class="step-check"></div><div class="step-text">Реализовать реф-ссылки через Firestore (уникальный код на пользователя)</div></div>
+        <div class="step" onclick="toggle(this,'s9_2')"><div class="step-check"></div><div class="step-text">Показывать прогресс: "5 из 10 приглашений отправлено"</div></div>
+        <div class="step" onclick="toggle(this,'s9_3')"><div class="step-check"></div><div class="step-text">Запускать реф не сразу, а когда юзер оценил продукт (через 3+ дня)</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Фразы для призыва</div>
+        <pre>"Помог другу найти работу? Расскажи ему про TrendSpot."
+"Пригласи друга — вы оба получите PRO бесплатно на месяц."</pre>
+      </div>
+
+      <div class="tip"><i data-lucide="alert-triangle"></i>Не запускай реферальную раньше, чем есть 200–300 активных пользователей.</div>
+    </div>
+
+    <!-- 10. ГОСТЕВЫЕ ПОСТЫ -->
+    <div class="section" id="s10">
+      <div class="section-title">Гостевые посты</div>
+      <div class="meta">
+        <span class="badge badge-p2">Мой совет</span>
+        <span class="badge badge-time">⏱ 2–3 часа на статью</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>500–2000 читателей со статьи</span>
+      </div>
+      <p class="desc">Напиши статью на Medium, Dev.to или Habr про "10 способов заработать на AI". В конце — ссылка на TrendSpot. Одна хорошая статья живёт годами.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s10_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на medium.com и dev.to</div></div>
+        <div class="step" onclick="toggle(this,'s10_1')"><div class="step-check"></div><div class="step-text">Написать статью: "10 способов заработать на AI в 2025 (с реальными цифрами)"</div></div>
+        <div class="step" onclick="toggle(this,'s10_2')"><div class="step-check"></div><div class="step-text">В конце статьи: "Полный список из 18 идей собрал здесь: [ссылка]"</div></div>
+        <div class="step" onclick="toggle(this,'s10_3')"><div class="step-check"></div><div class="step-text">Опубликовать на Medium + Dev.to + Habr (одна статья, 3 платформы)</div></div>
+        <div class="step" onclick="toggle(this,'s10_4')"><div class="step-check"></div><div class="step-text">Поделиться в Twitter + Reddit в день публикации</div></div>
+      </div>
+
+      <div class="box">
+        <div class="box-title">Заголовки, которые работают</div>
+        <pre>"10 способов заработать на ChatGPT — с реальными цифрами"
+"Я изучил 50 AI стартапов. Вот что общего у тех, кто зарабатывает"
+"Как я собрал сайт с 18 AI идеями и что из этого вышло"</pre>
+      </div>
+    </div>
+
+    <!-- 11. EMAIL -->
+    <div class="section" id="s11">
+      <div class="section-title">Email рассылка</div>
+      <div class="meta">
+        <span class="badge badge-p2">Мой совет</span>
+        <span class="badge badge-time">⏱ Настроить 1 раз, 30 мин / нед</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Самый высокий конверт из всех каналов</span>
+      </div>
+      <p class="desc">Email — самый прямой канал. Подписчик дал email = заинтересован. Конверсия с email в 5–10 раз выше, чем из соцсетей. Собирать с самого старта.</p>
+
+      <div class="block-title">Шаги</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s11_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на beehiiv.com (бесплатно до 2500 подписчиков)</div></div>
+        <div class="step" onclick="toggle(this,'s11_1')"><div class="step-check"></div><div class="step-text">Добавить форму подписки на TrendSpot ("Получай идею недели")</div></div>
+        <div class="step" onclick="toggle(this,'s11_2')"><div class="step-check"></div><div class="step-text">Написать первое письмо: "Вот 3 способа, которые дают результат за неделю"</div></div>
+        <div class="step" onclick="toggle(this,'s11_3')"><div class="step-check"></div><div class="step-text">Рассылать 1 раз в неделю — каждый вторник (стабильность = доверие)</div></div>
+        <div class="step" onclick="toggle(this,'s11_4')"><div class="step-check"></div><div class="step-text">В каждом письме: 1 идея + как начать + ссылка на TrendSpot</div></div>
+      </div>
+
+      <div class="info"><i data-lucide="info"></i>Beehiiv удобнее Mailchimp и бесплатен до 2500 подписчиков. Рекомендую.</div>
+    </div>
+
+    <!-- 12. YC + ПАРТНЁРЫ -->
+    <div class="section" id="s12">
+      <div class="section-title">YC Startup School + Партнёрства</div>
+      <div class="meta">
+        <span class="badge badge-p3">Мой совет</span>
+        <span class="badge badge-time">⏱ 1–2 часа</span>
+        <span class="badge badge-result"><i data-lucide="trending-up"></i>Первые 100 юзеров автоматом</span>
+      </div>
+      <p class="desc">YC Startup School — бесплатная программа от Y Combinator. Там есть каталог стартапов, куда можно добавить TrendSpot. Плюс партнёрства с другими AI-сервисами.</p>
+
+      <div class="block-title">YC Startup School</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s12_0')"><div class="step-check"></div><div class="step-text">Зарегистрироваться на startupschool.ycombinator.com</div></div>
+        <div class="step" onclick="toggle(this,'s12_1')"><div class="step-check"></div><div class="step-text">Добавить TrendSpot в каталог компаний</div></div>
+        <div class="step" onclick="toggle(this,'s12_2')"><div class="step-check"></div><div class="step-text">Познакомиться с другими основателями — потенциальные партнёры</div></div>
+      </div>
+
+      <div class="block-title">Партнёрства с AI-сервисами</div>
+      <div class="steps">
+        <div class="step" onclick="toggle(this,'s12_3')"><div class="step-check"></div><div class="step-text">Написать другим AI стартапам с предложением взаимного упоминания</div></div>
+        <div class="step" onclick="toggle(this,'s12_4')"><div class="step-check"></div><div class="step-text">Предложить обмен ссылками на сайтах (SEO + трафик)</div></div>
+        <div class="step" onclick="toggle(this,'s12_5')"><div class="step-check"></div><div class="step-text">Найти в Twitter основателей похожих проектов — написать в DM</div></div>
+      </div>
+
+      <div class="tip"><i data-lucide="lightbulb"></i>Партнёрство = вы рекомендуете друг друга аудитории. Ищи тех, у кого похожая аудитория, но другой продукт.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function show(i) {
+    document.querySelectorAll('.section').forEach((s, idx) => s.classList.toggle('active', idx === i));
+    document.querySelectorAll('.nav-item').forEach((t, idx) => t.classList.toggle('active', idx === i));
+  }
+
+  function toggle(el, key) {
+    el.classList.toggle('done');
+    localStorage.setItem('ts_' + key, el.classList.contains('done') ? '1' : '0');
+  }
+
+  // Восстановить состояние
+  document.querySelectorAll('.step').forEach(el => {
+    const onclick = el.getAttribute('onclick');
+    const match = onclick && onclick.match(/'([^']+)'\)/);
+    if (match && localStorage.getItem('ts_' + match[1]) === '1') el.classList.add('done');
+  });
+  lucide.createIcons();
+</script>
+
+</body>
+</html>

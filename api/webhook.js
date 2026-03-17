@@ -32,8 +32,13 @@ module.exports = async (req, res) => {
 
     if (userId && plan) {
       try {
-        await updateFirestoreUser(userId, { plan, stripeCustomerId });
-        console.log('Firestore updated: userId', userId, 'plan', plan);
+        const existing = await getFirestoreUser(userId);
+        if (existing?.plan?.stringValue === plan && existing?.stripeCustomerId?.stringValue === stripeCustomerId) {
+          console.log('Idempotent skip: plan already set for', userId);
+        } else {
+          await updateFirestoreUser(userId, { plan, stripeCustomerId });
+          console.log('Firestore updated: userId', userId, 'plan', plan);
+        }
       } catch (e) {
         console.error('Firestore update failed:', e.message);
       }
@@ -55,8 +60,13 @@ module.exports = async (req, res) => {
     try {
       const userId = await findUserIdByCustomer(customerId);
       if (userId) {
-        await updateFirestoreUser(userId, { plan: 'free' });
-        console.log('Subscription cancelled, plan reset to free:', userId);
+        const existing = await getFirestoreUser(userId);
+        if (existing?.plan?.stringValue === 'free') {
+          console.log('Idempotent skip: already free for', userId);
+        } else {
+          await updateFirestoreUser(userId, { plan: 'free' });
+          console.log('Subscription cancelled, plan reset to free:', userId);
+        }
       }
     } catch (e) {
       console.error('Cancel webhook error:', e.message);
